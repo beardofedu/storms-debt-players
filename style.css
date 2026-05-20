@@ -409,6 +409,37 @@ blockquote {
 .site-footer a { color: var(--text-muted); }
 .site-footer a:hover { color: var(--accent); }
 
+/* ── D&D Beyond Link ──────────────────────────────────────────── */
+.ddb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .85rem;
+  padding: .35rem .75rem;
+  background: rgba(190,30,45,.12);
+  border: 1px solid rgba(190,30,45,.35);
+  border-radius: 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #e8524a;
+  text-decoration: none;
+  transition: background .2s, border-color .2s, color .2s;
+}
+
+.ddb-link:hover {
+  background: rgba(190,30,45,.22);
+  border-color: rgba(190,30,45,.6);
+  color: #f0756e;
+}
+
+.ddb-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: auto;
+}
+
 /* ── Utility ──────────────────────────────────────────────────── */
 .text-muted  { color: var(--text-muted); }
 .text-gold   { color: var(--gold); }
