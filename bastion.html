@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heroes' Hall — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html" class="active">Heroes' Hall</a></li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Heroes' Hall</h1>
+  <p>Your bastion in Phandalin — home base, safe haven, and yours to shape</p>
+</header>
+
+<main class="container">
+
+  <!-- Overview -->
+  <section class="section">
+    <p class="section-label">The Bastion</p>
+    <h2>Your Home in Phandalin</h2>
+    <blockquote>
+      "The Alderman house, on the east rise. Restored, furnished, and yours. Every one of you.
+      Phandalin takes care of its heroes."
+      <br /><em>— Sildar Hallwinter</em>
+    </blockquote>
+    <p>
+      <strong>Heroes' Hall</strong> is a large stone-and-timber house on the eastern edge of Phandalin,
+      gifted to the party by the town council. It sits on a gentle rise overlooking the eastern orchards —
+      thick stone walls on the ground floor, dark timber framing above, a slate roof, and a wide porch
+      that wraps around the front.
+    </p>
+    <p>
+      Above the front door, a wooden plaque reads <strong>"Heroes' Hall"</strong> — carved by Pip Stonehill,
+      the lettering slightly uneven but full of love.
+    </p>
+    <div class="callout callout-info">
+      <p class="callout-title">🏠 What Is a Bastion?</p>
+      <p>A <strong>bastion</strong> is your personal stronghold — in this case, a shared house the whole party
+      manages together. The bastion system (2024 DMG, Chapter 8) gives you <strong>facilities</strong>:
+      special rooms that provide mechanical benefits between adventures.
+      You collectively manage <strong>12 facilities</strong> at the start of the campaign.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section">
+    <p class="section-label">How It Works</p>
+    <h2>The Bastion System</h2>
+
+    <h3>Facilities &amp; Stewards</h3>
+    <p>
+      Heroes' Hall has <strong>12 special facilities</strong>. Each character is the
+      <strong>steward</strong> of 2 facilities — they manage it and issue its orders each Bastion Turn.
+      Any character can <em>benefit</em> from any facility; stewards just run the place.
+    </p>
+
+    <h3 class="mt-3">Bastion Turns</h3>
+    <p>
+      Every <strong>7 in-game days</strong>, the DM calls for a <strong>Bastion Turn</strong>.
+      Each steward issues one <strong>order</strong> to each of their facilities. Your facilities
+      work on those orders while you're adventuring — crafting items, gathering intel, earning gold.
+    </p>
+
+    <div class="table-wrap mt-2">
+      <table>
+        <thead>
+          <tr>
+            <th>Order Type</th>
+            <th>What It Does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Craft</strong></td><td>Create an item — potion, scroll, weapon, etc.</td></tr>
+          <tr><td><strong>Research</strong></td><td>Learn information about a topic, creature, or magic item</td></tr>
+          <tr><td><strong>Trade</strong></td><td>Buy or sell goods, earn income</td></tr>
+          <tr><td><strong>Recruit</strong></td><td>Hire hirelings or attract allies to your cause</td></tr>
+          <tr><td><strong>Harvest</strong></td><td>Gather herbs, spell components, or raw materials</td></tr>
+          <tr><td><strong>Empower</strong></td><td>Gain a temporary magical benefit for the party</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted mt-1">Not every facility supports every order — each has specific orders it can handle.</p>
+
+    <h3 class="mt-3">Leveling Up Heroes' Hall</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Party Facility Slots</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>5</td><td>4 facilities</td><td>Basic bastions (not applicable — you start at 13)</td></tr>
+          <tr><td>9</td><td>6 facilities</td><td>Level 9 facilities unlocked</td></tr>
+          <tr style="background: rgba(240,230,140,.06);">
+            <td><strong>13 ← You are here</strong></td>
+            <td><strong>12 facilities</strong></td>
+            <td><strong>Level 13 facilities unlocked — 2 per character</strong></td>
+          </tr>
+          <tr><td>17</td><td>14 facilities</td><td>Party chooses 2 new facilities together</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Facility Stewards -->
+  <section class="section">
+    <p class="section-label">Current Facilities</p>
+    <h2>Facility Stewards &amp; Assignments</h2>
+    <p>Each character stewards 2 facilities. If a steward is absent, the backup steward may issue orders instead.</p>
+
+    <div class="table-wrap mt-2">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Facility</th>
+            <th>Location</th>
+            <th>Steward</th>
+            <th>Backup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>War Room</strong></td><td>Great Room</td><td>Tyrael (Jason)</td><td>Kaelen</td></tr>
+          <tr><td>2</td><td><strong>Smithy</strong></td><td>Workshop Shed</td><td>Tyrael (Jason)</td><td>Kaelen</td></tr>
+          <tr><td>3</td><td><strong>Pub</strong></td><td>Wine Cellar <em>(speakeasy)</em></td><td>Jack (Bird)</td><td>Vesha</td></tr>
+          <tr><td>4</td><td><strong>Trophy Room</strong></td><td>Entry Hall</td><td>Jack (Bird)</td><td>Anyone</td></tr>
+          <tr><td>5</td><td><strong>Stable</strong></td><td>Stable</td><td>Asteri (Alex)</td><td>Kaelen</td></tr>
+          <tr><td>6</td><td><strong>Garden</strong></td><td>Garden</td><td>Asteri (Alex)</td><td>Marlo</td></tr>
+          <tr><td>7</td><td><strong>Arcane Study</strong></td><td>Study</td><td>Marlo (Tom)</td><td>Vesha</td></tr>
+          <tr><td>8</td><td><strong>Library</strong></td><td>Root Cellar <em>(converted archive)</em></td><td>Marlo (Tom)</td><td>Tyrael</td></tr>
+          <tr><td>9</td><td><strong>Training Area</strong></td><td>Yard</td><td>Kaelen (Josh)</td><td>Tyrael</td></tr>
+          <tr><td>10</td><td><strong>Storehouse</strong></td><td>Mudroom / Side Storage</td><td>Kaelen (Josh)</td><td>Anyone</td></tr>
+          <tr><td>11</td><td><strong>Sanctuary</strong></td><td>Small Bedroom <em>(upper, converted)</em></td><td>Vesha (Clarice)</td><td>Tyrael</td></tr>
+          <tr><td>12</td><td><strong>Observatory</strong></td><td>Balcony Room</td><td>Vesha (Clarice)</td><td>Marlo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn mt-3">
+      <p class="callout-title">🔄 Want to Swap?</p>
+      <p>Want to change facility assignments or stewards? Talk to the DM — changes take one Bastion Turn to take effect.</p>
+    </div>
+  </section>
+
+  <!-- Facility Descriptions -->
+  <section class="section">
+    <p class="section-label">What Each Facility Does</p>
+    <h2>Facility Guide</h2>
+
+    <h3 class="mb-2">Basic Facilities (Level 5+)</h3>
+    <div class="grid-2">
+      <div class="facility-card">
+        <div class="facility-name">🛏️ Bedroom</div>
+        <div class="facility-steward">Everyone gets one free — doesn't count against the 12 slots</div>
+        <div class="facility-desc">Long rest benefits, personal storage. Make it yours — decorate it however you like.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🐴 Stable</div>
+        <div class="facility-steward">Steward: Asteri · Backup: Kaelen</div>
+        <div class="facility-desc">Houses mounts and animal companions. Rocket lives here. Issue orders to care for, train, or use your animals.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">📦 Storehouse</div>
+        <div class="facility-steward">Steward: Kaelen · Backup: Anyone</div>
+        <div class="facility-desc">Stores goods, manages party supplies, earns income through trade orders. Your logistical hub.</div>
+      </div>
+    </div>
+
+    <h3 class="mb-2 mt-3">Level 9 Facilities</h3>
+    <div class="grid-2">
+      <div class="facility-card">
+        <div class="facility-name">🔮 Arcane Study</div>
+        <div class="facility-steward">Steward: Marlo · Backup: Vesha</div>
+        <div class="facility-desc">Craft spell scrolls, research arcane topics. Issue a Craft order to produce a scroll, or Research to dig into magical lore.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🌿 Garden</div>
+        <div class="facility-steward">Steward: Asteri · Backup: Marlo</div>
+        <div class="facility-desc">Grow herbs and harvest potion ingredients. Issue Harvest orders to stock up on spell components and alchemical materials.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">📚 Library</div>
+        <div class="facility-steward">Steward: Marlo · Backup: Tyrael</div>
+        <div class="facility-desc">Research lore, identify items, gain proficiency benefits. Issue Research orders to learn about creatures, locations, or mysteries.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">⛪ Sanctuary</div>
+        <div class="facility-steward">Steward: Vesha · Backup: Tyrael</div>
+        <div class="facility-desc">Healing services, curing conditions, divine communion. Between adventures, issue orders to restore the party or seek divine insight.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">⚒️ Smithy</div>
+        <div class="facility-steward">Steward: Tyrael · Backup: Kaelen</div>
+        <div class="facility-desc">Craft and enhance weapons and armor. Issue Craft orders to make or upgrade equipment between sessions.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🏋️ Training Area</div>
+        <div class="facility-steward">Steward: Kaelen · Backup: Tyrael</div>
+        <div class="facility-desc">Gain temporary combat benefits, train hirelings. Issue Empower orders to prepare for upcoming fights.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🏆 Trophy Room</div>
+        <div class="facility-steward">Steward: Jack · Backup: Anyone</div>
+        <div class="facility-desc">Display trophies from defeated foes to gain Heroic Inspiration. The more impressive the collection, the better the benefit.</div>
+      </div>
+    </div>
+
+    <h3 class="mb-2 mt-3">Level 13 Facilities</h3>
+    <div class="grid-2">
+      <div class="facility-card">
+        <div class="facility-name">🍺 Pub</div>
+        <div class="facility-steward">Steward: Jack · Backup: Vesha</div>
+        <div class="facility-desc">Gather rumors, recruit contacts, earn gold. Jack's speakeasy in the wine cellar. Issue Recruit or Trade orders to work the crowd.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">⚔️ War Room</div>
+        <div class="facility-steward">Steward: Tyrael · Backup: Kaelen</div>
+        <div class="facility-desc">Plan missions, gain tactical advantages on upcoming encounters. Issue Research or Empower orders to prepare the party strategically.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🔭 Observatory</div>
+        <div class="facility-steward">Steward: Vesha · Backup: Marlo</div>
+        <div class="facility-desc">Track celestial events, gain divination benefits. Issue Research or Empower orders to read the stars for advantages ahead.</div>
+      </div>
+    </div>
+
+    <h3 class="mb-2 mt-3">Level 17 Facilities (Unlocked Later)</h3>
+    <div class="grid-2">
+      <div class="facility-card">
+        <div class="facility-name">✨ Teleportation Circle</div>
+        <div class="facility-steward">Unlocked at Level 17 — party chooses</div>
+        <div class="facility-desc">A permanent <em>Teleportation Circle</em> anchored to Heroes' Hall. Massive quality-of-life upgrade for the whole party.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🎭 Theater</div>
+        <div class="facility-steward">Unlocked at Level 17 — party chooses</div>
+        <div class="facility-desc">Perform shows, boost morale, earn gold and Inspiration. Vesha's dream facility.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🏛️ Guildhall</div>
+        <div class="facility-steward">Unlocked at Level 17 — party chooses</div>
+        <div class="facility-desc">Run an organization and command followers. Build a network of allies and agents across the Sword Coast.</div>
+      </div>
+      <div class="facility-card">
+        <div class="facility-name">🧿 Demiplane</div>
+        <div class="facility-steward">Unlocked at Level 17 — party chooses</div>
+        <div class="facility-desc">Access a private extradimensional space for storage or refuge. Useful for Marlo's ever-expanding archive.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Layout -->
+  <section class="section">
+    <p class="section-label">The House</p>
+    <h2>Layout of Heroes' Hall</h2>
+
+    <div class="grid-2">
+      <div>
+        <h3>Ground Floor</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Room</th><th>Size</th><th>Facility</th></tr></thead>
+            <tbody>
+              <tr><td>Great Room</td><td>30×20 ft</td><td>War Room</td></tr>
+              <tr><td>Kitchen</td><td>15×15 ft</td><td>Kitchen</td></tr>
+              <tr><td>Study</td><td>15×15 ft</td><td>Arcane Study</td></tr>
+              <tr><td>Entry / Mudroom</td><td>10×10 ft</td><td>Trophy Room</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Upper Floor</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Room</th><th>Size</th><th>Who</th></tr></thead>
+            <tbody>
+              <tr><td>Large Bedroom ×2</td><td>15×15 ft</td><td>Tyrael / Jack</td></tr>
+              <tr><td>Small Bedroom ×3</td><td>10×10 ft</td><td>Kaelen / Vesha / Sanctuary</td></tr>
+              <tr><td>Balcony Room</td><td>15×10 ft</td><td>Asteri / Observatory</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Cellar</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Room</th><th>Size</th><th>Facility</th></tr></thead>
+            <tbody>
+              <tr><td>Wine Cellar</td><td>20×15 ft</td><td>Pub <em>(Jack's speakeasy)</em></td></tr>
+              <tr><td>Root Cellar / Vault</td><td>10×10 ft</td><td>Library</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Outbuildings &amp; Grounds</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Area</th><th>Size</th><th>Facility</th></tr></thead>
+            <tbody>
+              <tr><td>Stable</td><td>20×15 ft</td><td>Stable</td></tr>
+              <tr><td>Workshop Shed</td><td>15×15 ft</td><td>Smithy</td></tr>
+              <tr><td>Garden</td><td>30×20 ft</td><td>Garden</td></tr>
+              <tr><td>Yard</td><td>40×30 ft</td><td>Training Area</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-success mt-3">
+      <p class="callout-title">🏡 Make It Yours</p>
+      <p>Decorate your room, name your spaces, build a Thortle memorial in the garden,
+      install the speakeasy. Heroes' Hall is yours — treat it like home.</p>
+    </div>
+  </section>
+
+  <!-- Pip section -->
+  <section class="section">
+    <p class="section-label">Caretaker</p>
+    <h2>Pip Stonehill</h2>
+    <p>
+      When the party is away adventuring, <strong>Pip Stonehill</strong> — the innkeepers' son the party
+      helped rescue — has self-appointed himself as Heroes' Hall's caretaker. He keeps the fire lit,
+      waters the garden, and leaves notes about town gossip on the kitchen table.
+    </p>
+    <p class="text-muted">He carved the sign above the door. His letters are a little uneven. He's very proud of it.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · A D&amp;D 5e (2024) Campaign · <a href="index.html">← Back to Home</a></p>
+</footer>
+
+</body>
+</html>
