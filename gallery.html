@@ -37,7 +37,7 @@
 
     <div class="gallery-masonry">
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-01-the-brand.svg" alt="The Brand Revealed — Session 1" loading="lazy" />
         <div class="gallery-caption">
           <strong>The Brand Revealed</strong>
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-02-heroes-hall.svg" alt="Heroes' Hall — Session 2" loading="lazy" />
         <div class="gallery-caption">
           <strong>Heroes' Hall</strong>
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-03-tavern-night.svg" alt="Tavern Night — Session 3" loading="lazy" />
         <div class="gallery-caption">
           <strong>Tavern Night</strong>
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-04-storm-approaches.svg" alt="The Storm Approaches — Session 4" loading="lazy" />
         <div class="gallery-caption">
           <strong>The Storm Approaches</strong>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-05-battle-map.svg" alt="The Battle of Phandalin — Session 5" loading="lazy" />
         <div class="gallery-caption">
           <strong>The Battle of Phandalin</strong>
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
+      <div class="gallery-item" tabindex="0" role="button" onclick="openLightbox(this)" onkeydown="if(event.key==='Enter')openLightbox(this)">
         <img src="gallery/session-06-party-portrait.svg" alt="Party Portrait — Session 6" loading="lazy" />
         <div class="gallery-caption">
           <strong>Party Portrait</strong>
@@ -112,12 +112,12 @@
 
 <script>
   function openLightbox(item) {
-    var img = item.querySelector('img');
-    var caption = item.querySelector('.gallery-caption strong');
-    var sub = item.querySelector('.gallery-caption span');
-    var lb = document.getElementById('lightbox');
-    var lbImg = document.getElementById('lightbox-img');
-    var lbCap = document.getElementById('lightbox-caption');
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-caption strong');
+    const sub = item.querySelector('.gallery-caption span');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCap = document.getElementById('lightbox-caption');
 
     lbImg.src = img.src;
     lbImg.alt = img.alt;
