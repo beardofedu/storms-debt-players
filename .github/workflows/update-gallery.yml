@@ -1,0 +1,83 @@
+name: Update Gallery
+
+on:
+  push:
+    paths:
+      - 'gallery/**'
+
+permissions:
+  contents: write
+
+jobs:
+  update-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rebuild gallery.html from gallery/ images
+        run: |
+          # Collect all image files from gallery/, sorted alphabetically
+          images=$(find gallery/ -maxdepth 1 -type f \
+            \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
+               -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
+            | sort)
+
+          # Build the replacement block
+          {
+            echo '      <!-- GALLERY-START (auto-generated — do not edit between these markers) -->'
+            for img in $images; do
+              filename=$(basename "$img")
+              name_raw="${filename%.*}"
+              title=$(echo "$name_raw" | sed -E 's/^session-[0-9]+-//' | sed 's/[-_]/ /g' | sed -E 's/(^| )(.)/\1\u\2/g')
+              session=$(echo "$name_raw" | grep -oP '^session-\K[0-9]+' || true)
+
+              if [ -n "$session" ]; then
+                session_num=$(echo "$session" | sed 's/^0*//')
+                session_label="Session ${session_num}"
+                alt_text="${title} — ${session_label}"
+              else
+                session_label=""
+                alt_text="${title}"
+              fi
+
+              echo ""
+              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\">"
+              echo "        <img src=\"${img}\" alt=\"${alt_text}\" loading=\"lazy\" />"
+              echo "        <div class=\"gallery-caption\">"
+              echo "          <strong>${title}</strong>"
+              if [ -n "$session_label" ]; then
+                echo "          <span>${session_label}</span>"
+              fi
+              echo "        </div>"
+              echo "      </div>"
+            done
+            echo ""
+            echo '      <!-- GALLERY-END -->'
+          } > /tmp/gallery_block.html
+
+          # Replace content between markers using Python
+          python3 -c "
+          import re
+          with open('gallery.html') as f:
+              content = f.read()
+          with open('/tmp/gallery_block.html') as f:
+              block = f.read()
+          result = re.sub(
+              r'      <!-- GALLERY-START.*?<!-- GALLERY-END -->',
+              block.rstrip(),
+              content,
+              flags=re.DOTALL
+          )
+          with open('gallery.html', 'w') as f:
+              f.write(result)
+          "
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add gallery.html
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update gallery with new photos [auto]"
+          git push

@@ -1,9 +1,9 @@
 # 📸 Session Photos
 
-Drop session photos into this folder. The gallery page will display any images placed here.
+Drop session photos into this folder and commit them. A GitHub Action will automatically update `gallery.html` with any new images.
 
-**Supported formats:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.webp`
+**Supported formats:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.webp`, `.svg`
 
-**Naming convention (optional):** `session-01-description.jpg`
+**Naming convention (recommended):** `session-01-description.jpg`
 
-After adding photos, update the `gallery.html` file to include them in the gallery grid.
+Photos named with the `session-NN-` prefix will automatically get a "Session N" label in the gallery. The rest of the filename becomes the display title (hyphens and underscores are converted to spaces).
