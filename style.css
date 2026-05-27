@@ -440,6 +440,117 @@ blockquote {
   image-rendering: auto;
 }
 
+/* ── Gallery ──────────────────────────────────────────────────── */
+.gallery-masonry {
+  columns: 3;
+  column-gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  position: relative;
+}
+
+.gallery-item:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4), 0 0 12px rgba(240,230,140,.08);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  transition: filter .3s;
+}
+
+.gallery-item:hover img {
+  filter: brightness(1.1);
+}
+
+.gallery-caption {
+  padding: .6rem .85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+}
+
+.gallery-caption strong {
+  font-family: 'Cinzel', serif;
+  font-size: .85rem;
+  color: var(--lightning);
+}
+
+.gallery-caption span {
+  font-size: .75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,.92);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0,0,0,.6);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: color .2s;
+  line-height: 1;
+}
+
+.lightbox-close:hover { color: var(--lightning); }
+
+.lightbox-caption {
+  margin-top: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .gallery-masonry { columns: 2; }
+}
+
+@media (max-width: 500px) {
+  .gallery-masonry { columns: 1; }
+}
+
 /* ── Utility ──────────────────────────────────────────────────── */
 .text-muted  { color: var(--text-muted); }
 .text-gold   { color: var(--gold); }
