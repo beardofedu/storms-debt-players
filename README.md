@@ -11,6 +11,7 @@ A GitHub Pages site with player resources for **The Storm's Debt**, a D&D 5e (20
 | [Home](index.html) | Campaign overview, party roster, session prep checklist |
 | [The Party](party.html) | Character cards for all 6 adventurers |
 | [Heroes' Hall](bastion.html) | Full bastion guide — facilities, stewards, layout, rules |
+| [Kud's Field Kit](kud.html) | Shield Guardian attacks, Conjure Animals attack rolls, and health tracker |
 | [Rules Reference](rules.html) | Quick rules ref for high-level 5e play (spells, conditions, action economy) |
 | [Table Safety](safety.html) | X-Card, Lines & Veils, open door policy |
 
