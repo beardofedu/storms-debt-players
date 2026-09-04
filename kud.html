@@ -93,12 +93,25 @@
     <div class="card">
       <div class="form-grid">
         <div class="form-row">
+          <label for="spell-level">Spell slot used</label>
+          <select id="spell-level">
+            <option value="3">3rd level</option>
+            <option value="4">4th level</option>
+            <option value="5">5th level</option>
+            <option value="6">6th level</option>
+            <option value="7">7th level</option>
+            <option value="8">8th level</option>
+            <option value="9">9th level</option>
+          </select>
+        </div>
+        <div class="form-row">
           <label for="beast-select">Creature</label>
           <select id="beast-select">
             <option value="giant-constrictor">Giant Constrictor Snake · CR 2</option>
             <option value="dire-wolf">Dire Wolf · CR 1</option>
             <option value="giant-hyena">Giant Hyena · CR 1</option>
             <option value="brown-bear">Brown Bear · CR 1</option>
+            <option value="deep-rothe">Deep Rothe · CR 1/4</option>
             <option value="wolf">Wolf · CR 1/4</option>
             <option value="giant-owl">Giant Owl · CR 1/4</option>
             <option value="panther">Panther · CR 1/4</option>
@@ -171,6 +184,10 @@
         bite: { label: 'Bite', bonus: 5, damage: '1d8+4', damageLabel: '1d8 + 4 piercing' },
         claws: { label: 'Claws', bonus: 5, damage: '2d6+4', damageLabel: '2d6 + 4 slashing' }
       }
+    },
+    'deep-rothe': {
+      max: 8,
+      attacks: { gore: { label: 'Gore', bonus: 4, damage: '1d6+2', damageLabel: '1d6 + 2 piercing' } }
     },
     wolf: {
       max: 8,
@@ -246,11 +263,12 @@
   function updateBeastAttacks() {
     const beast = beasts[beastSelect.value];
     beastCount.max = beast.max;
-    if (Number(beastCount.value) > beast.max) beastCount.value = beast.max;
+    beastCount.value = beast.max;
     beastAttack.innerHTML = Object.entries(beast.attacks)
       .map(([key, attack]) => `<option value="${key}">${attack.label} · ${attack.damageLabel}</option>`)
       .join('');
-    beastDetails.textContent = `Conjure Animals allows up to ${beast.max} ${beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0]}${beast.max === 1 ? '' : 's'} at this CR.`;
+    const slot = document.getElementById('spell-level').value;
+    beastDetails.textContent = `At ${slot}${slot === '3' ? 'rd' : slot === '1' ? 'st' : slot === '2' ? 'nd' : 'th'} level, the 2014 spell summons ${beast.max} ${beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0]}${beast.max === 1 ? '' : 's'} at this CR. Upcasting does not increase the quantity; adjust the attacking count if only some are engaging.`;
   }
 
   document.querySelectorAll('[data-damage]').forEach((button) => {
@@ -278,6 +296,7 @@
     rollAttack('Shield Guardian', attack, 2);
   });
   beastSelect.addEventListener('change', updateBeastAttacks);
+  document.getElementById('spell-level').addEventListener('change', updateBeastAttacks);
   document.getElementById('beast-roll').addEventListener('click', () => {
     const beast = beasts[beastSelect.value];
     const attack = beast.attacks[beastAttack.value];
