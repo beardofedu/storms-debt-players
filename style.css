@@ -536,6 +536,36 @@ blockquote {
 
 .lightbox-close:hover { color: var(--lightning); }
 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,.4);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 2rem;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color .2s, background .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-nav:hover { color: var(--lightning); background: rgba(0,0,0,.65); }
+
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+
+@media (max-width: 600px) {
+  .lightbox-nav { width: 2.25rem; height: 2.25rem; font-size: 1.5rem; }
+  .lightbox-prev { left: .5rem; }
+  .lightbox-next { right: .5rem; }
+}
+
 .lightbox-caption {
   margin-top: 1rem;
   font-family: 'Cinzel', serif;

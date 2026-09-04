@@ -14,16 +14,32 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Rebuild gallery.html from gallery/ images
         run: |
-          # Build the replacement block from image files in gallery/
+          # Build the replacement block from image files in gallery/,
+          # ordered by the commit date each image was first added.
           {
             echo '      <!-- GALLERY-START (auto-generated — do not edit between these markers) -->'
             find gallery/ -maxdepth 1 -type f \
               \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
                  -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
-              | sort | while IFS= read -r img; do
+              -print0 \
+              | while IFS= read -r -d '' img; do
+                  ts=$(git log --follow --diff-filter=A --format=%at -- "$img" | tail -n 1)
+                  if [ -z "$ts" ]; then
+                    ts=$(git log -1 --format=%at -- "$img")
+                  fi
+                  if [ -z "$ts" ]; then
+                    ts=$(date +%s)
+                  fi
+                  printf '%s\t%s\n' "$ts" "$img"
+                done \
+              | sort -n -k1,1 \
+              | cut -f2- \
+              | while IFS= read -r img; do
               filename=$(basename "$img")
               name_raw="${filename%.*}"
               title=$(echo "$name_raw" | sed -E 's/^session-[0-9]+-//' | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
@@ -33,20 +49,16 @@ jobs:
                 session_num=$(echo "$session" | sed 's/^0*//')
                 session_label="Session ${session_num}"
                 alt_text="${title} — ${session_label}"
+                session_attr=" data-session=\"${session_label}\""
               else
                 session_label=""
                 alt_text="${title}"
+                session_attr=""
               fi
 
               echo ""
-              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\">"
+              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\"${session_attr}>"
               echo "        <img src=\"${img}\" alt=\"${alt_text}\" loading=\"lazy\" />"
-              echo "        <div class=\"gallery-caption\">"
-              echo "          <strong>${title}</strong>"
-              if [ -n "$session_label" ]; then
-                echo "          <span>${session_label}</span>"
-              fi
-              echo "        </div>"
               echo "      </div>"
             done
             echo ""
