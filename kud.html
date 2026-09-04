@@ -89,7 +89,9 @@
   <section class="section">
     <p class="section-label">Conjure Animals · 2014</p>
     <h2>Summoned Creature Roller</h2>
-    <p>Choose a creature from the 2014 options below, set how many are attacking, and roll one attack for each creature.</p>
+    <p>Choose a creature from the 2014 options below. The number summoned is set automatically from the spell
+    slot you cast it with — twice as many at 5th level, three times as many at 7th level, and four times as
+    many at 9th level — and you can roll one attack for each creature.</p>
     <div class="card">
       <div class="form-grid">
         <div class="form-row">
@@ -97,11 +99,11 @@
           <select id="spell-level">
             <option value="3">3rd level</option>
             <option value="4">4th level</option>
-            <option value="5">5th level</option>
-            <option value="6">6th level</option>
-            <option value="7">7th level</option>
-            <option value="8">8th level</option>
-            <option value="9">9th level</option>
+            <option value="5">5th level (x2 creatures)</option>
+            <option value="6">6th level (x2 creatures)</option>
+            <option value="7">7th level (x3 creatures)</option>
+            <option value="8">8th level (x3 creatures)</option>
+            <option value="9">9th level (x4 creatures)</option>
           </select>
         </div>
         <div class="form-row">
@@ -119,12 +121,18 @@
         </div>
         <div class="form-row">
           <label for="beast-count">Number attacking</label>
-          <input id="beast-count" type="number" min="1" max="8" value="1" />
+          <input id="beast-count" type="number" min="1" max="32" value="1" />
         </div>
         <div class="form-row">
           <label for="beast-attack">Attack</label>
           <select id="beast-attack"></select>
         </div>
+      </div>
+      <div class="form-row" id="rothe-charge-row" hidden>
+        <label class="checkbox-label">
+          <input type="checkbox" id="rothe-charge" />
+          Charged at least 20 ft. straight toward the target this turn (+2d6 piercing on hit)
+        </label>
       </div>
       <p id="beast-details" class="text-muted mt-2"></p>
       <div class="button-row">
@@ -161,44 +169,50 @@
   const beastCount = document.getElementById('beast-count');
   const beastAttack = document.getElementById('beast-attack');
   const beastDetails = document.getElementById('beast-details');
+  const spellLevel = document.getElementById('spell-level');
+  const rotheChargeRow = document.getElementById('rothe-charge-row');
+  const rotheCharge = document.getElementById('rothe-charge');
 
+  // Base counts per the 2014 Conjure Animals spell (CR 2/1/1-2/1-4 => 1/2/4/8).
   const beasts = {
     'giant-constrictor': {
-      max: 1,
+      baseCount: 1,
       attacks: {
         bite: { label: 'Bite', bonus: 6, damage: '2d6+4', damageLabel: '2d6 + 4 piercing' },
         constrict: { label: 'Constrict', bonus: 6, damage: '2d8+4', damageLabel: '2d8 + 4 bludgeoning' }
       }
     },
     'dire-wolf': {
-      max: 2,
+      baseCount: 2,
       attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
     },
     'giant-hyena': {
-      max: 2,
+      baseCount: 2,
       attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
     },
     'brown-bear': {
-      max: 2,
+      baseCount: 2,
       attacks: {
         bite: { label: 'Bite', bonus: 5, damage: '1d8+4', damageLabel: '1d8 + 4 piercing' },
         claws: { label: 'Claws', bonus: 5, damage: '2d6+4', damageLabel: '2d6 + 4 slashing' }
       }
     },
     'deep-rothe': {
-      max: 8,
-      attacks: { gore: { label: 'Gore', bonus: 4, damage: '1d6+2', damageLabel: '1d6 + 2 piercing' } }
+      baseCount: 8,
+      // Deep Rothe (Mordenkainen Presents: Monsters of the Multiverse): Gore +6 to hit, 1d6+4 piercing;
+      // deals an extra 2d6 piercing if it moved at least 20 ft. straight toward the target this turn.
+      attacks: { gore: { label: 'Gore', bonus: 6, damage: '1d6+4', damageLabel: '1d6 + 4 piercing', charge: true } }
     },
     wolf: {
-      max: 8,
+      baseCount: 8,
       attacks: { bite: { label: 'Bite', bonus: 4, damage: '2d4+2', damageLabel: '2d4 + 2 piercing' } }
     },
     'giant-owl': {
-      max: 8,
+      baseCount: 8,
       attacks: { talons: { label: 'Talons', bonus: 3, damage: '2d6+1', damageLabel: '2d6 + 1 slashing' } }
     },
     panther: {
-      max: 8,
+      baseCount: 8,
       attacks: {
         bite: { label: 'Bite', bonus: 4, damage: '1d6+2', damageLabel: '1d6 + 2 piercing' },
         claws: { label: 'Claws', bonus: 4, damage: '1d4+2', damageLabel: '1d4 + 2 slashing' }
@@ -206,13 +220,21 @@
     }
   };
 
+  // 2014 "At Higher Levels": 5th-level slot = x2, 7th-level slot = x3, 9th-level slot = x4.
+  function countMultiplier(level) {
+    if (level >= 9) return 4;
+    if (level >= 7) return 3;
+    if (level >= 5) return 2;
+    return 1;
+  }
+
   function rollDie(sides) {
     return Math.floor(Math.random() * sides) + 1;
   }
 
   function rollDamage(formula) {
-    const match = formula.match(/^(\d+)d(\d+)\+(\d+)$/);
-    let total = Number(match[3]);
+    const match = formula.match(/^(\d+)d(\d+)(?:\+(\d+))?$/);
+    let total = match[3] ? Number(match[3]) : 0;
     const dice = [];
     for (let i = 0; i < Number(match[1]); i += 1) {
       const die = rollDie(Number(match[2]));
@@ -235,18 +257,28 @@
     rollLog.prepend(entry);
   }
 
-  function rollAttack(name, attack, index) {
+  function rollAttack(name, attack, index, extraFormula, extraLabel) {
     const d20 = rollDie(20);
     const total = d20 + attack.bonus;
-    const damage = rollDamage(attack.damage);
     const critical = d20 === 20;
     const resultClass = d20 === 1 ? 'roll-fumble' : critical ? 'roll-critical' : '';
-    const damageText = critical
-      ? `${damage.dice.concat(damage.dice).join(' + ')} + ${attack.damage.split('+')[1]} = ${damage.total * 2 - Number(attack.damage.split('+')[1])}`
-      : `${damage.dice.join(' + ')} + ${attack.damage.split('+')[1]} = ${damage.total}`;
+
+    const rolls = [rollDamage(attack.damage)];
+    if (critical) rolls.push(rollDamage(attack.damage));
+    if (extraFormula) {
+      rolls.push(rollDamage(extraFormula));
+      if (critical) rolls.push(rollDamage(extraFormula));
+    }
+
+    const allDice = rolls.flatMap((roll) => roll.dice);
+    const flatBonus = rolls.reduce((sum, roll) => sum + (roll.total - roll.dice.reduce((a, b) => a + b, 0)), 0);
+    const damageTotal = allDice.reduce((sum, die) => sum + die, 0) + flatBonus;
+    const damageText = `${allDice.join(' + ')} + ${flatBonus} = ${damageTotal}`;
+    const damageLabel = extraFormula ? `${attack.damageLabel} + ${extraLabel}` : attack.damageLabel;
+
     addLog(`<strong>${name}${index ? ` #${index}` : ''} — ${attack.label}</strong>
       <span class="roll-result ${resultClass}">d20 ${d20} ${formatBonus(attack.bonus)} = ${total}</span>
-      <span class="roll-damage">${damageText} damage · ${attack.damageLabel}</span>`, resultClass);
+      <span class="roll-damage">${damageText} damage · ${damageLabel}</span>`, resultClass);
   }
 
   function updateHealth(nextValue) {
@@ -260,15 +292,33 @@
     localStorage.setItem('kud-guardian-health', JSON.stringify({ current, max }));
   }
 
+  function ordinal(level) {
+    if (level === 3) return '3rd';
+    if (level === 1) return '1st';
+    if (level === 2) return '2nd';
+    return `${level}th`;
+  }
+
   function updateBeastAttacks() {
     const beast = beasts[beastSelect.value];
-    beastCount.max = beast.max;
-    beastCount.value = beast.max;
+    const level = Number(spellLevel.value);
+    const multiplier = countMultiplier(level);
+    const count = beast.baseCount * multiplier;
+    beastCount.max = count;
+    beastCount.value = count;
     beastAttack.innerHTML = Object.entries(beast.attacks)
       .map(([key, attack]) => `<option value="${key}">${attack.label} · ${attack.damageLabel}</option>`)
       .join('');
-    const slot = document.getElementById('spell-level').value;
-    beastDetails.textContent = `At ${slot}${slot === '3' ? 'rd' : slot === '1' ? 'st' : slot === '2' ? 'nd' : 'th'} level, the 2014 spell summons ${beast.max} ${beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0]}${beast.max === 1 ? '' : 's'} at this CR. Upcasting does not increase the quantity; adjust the attacking count if only some are engaging.`;
+    const creatureName = beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0];
+    beastDetails.textContent = `At ${ordinal(level)} level, the 2014 spell summons ${count} ${creatureName}${count === 1 ? '' : 's'} (base of ${beast.baseCount} at CR, ${multiplier === 1 ? 'no multiplier' : `x${multiplier} from the higher-level slot`}). Adjust the attacking count if only some are engaging.`;
+    updateRotheChargeVisibility();
+  }
+
+  function updateRotheChargeVisibility() {
+    const beast = beasts[beastSelect.value];
+    const attack = beast.attacks[beastAttack.value];
+    rotheChargeRow.hidden = !(attack && attack.charge);
+    if (rotheChargeRow.hidden) rotheCharge.checked = false;
   }
 
   document.querySelectorAll('[data-damage]').forEach((button) => {
@@ -296,12 +346,15 @@
     rollAttack('Shield Guardian', attack, 2);
   });
   beastSelect.addEventListener('change', updateBeastAttacks);
-  document.getElementById('spell-level').addEventListener('change', updateBeastAttacks);
+  spellLevel.addEventListener('change', updateBeastAttacks);
+  beastAttack.addEventListener('change', updateRotheChargeVisibility);
   document.getElementById('beast-roll').addEventListener('click', () => {
     const beast = beasts[beastSelect.value];
     const attack = beast.attacks[beastAttack.value];
+    const creatureName = beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0];
+    const useCharge = attack.charge && rotheCharge.checked;
     for (let i = 1; i <= Number(beastCount.value); i += 1) {
-      rollAttack(beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0], attack, i);
+      rollAttack(creatureName, attack, i, useCharge ? '2d6' : null, useCharge ? 'charge (2d6 piercing)' : null);
     }
   });
   document.getElementById('clear-log').addEventListener('click', () => {
