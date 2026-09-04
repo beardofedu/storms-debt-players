@@ -49,20 +49,16 @@ jobs:
                 session_num=$(echo "$session" | sed 's/^0*//')
                 session_label="Session ${session_num}"
                 alt_text="${title} — ${session_label}"
+                session_attr=" data-session=\"${session_label}\""
               else
                 session_label=""
                 alt_text="${title}"
+                session_attr=""
               fi
 
               echo ""
-              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\">"
+              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\"${session_attr}>"
               echo "        <img src=\"${img}\" alt=\"${alt_text}\" loading=\"lazy\" />"
-              echo "        <div class=\"gallery-caption\">"
-              echo "          <strong>${title}</strong>"
-              if [ -n "$session_label" ]; then
-                echo "          <span>${session_label}</span>"
-              fi
-              echo "        </div>"
               echo "      </div>"
             done
             echo ""
