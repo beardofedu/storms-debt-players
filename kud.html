@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kud's Field Kit — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html">Heroes' Hall</a></li>
+      <li><a href="kud.html" class="active">Kud's Field Kit</a></li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Kud's Field Kit</h1>
+  <p>Evidence, field notes, and an alarming number of summoned animals</p>
+</header>
+
+<main class="container">
+  <div class="callout callout-info">
+    <p class="callout-title">📋 Detective's note</p>
+    <p>This toolkit uses the <strong>2014</strong> Shield Guardian and <strong>2014</strong> <em>conjure animals</em>
+    stat blocks. It rolls the listed attacks; apply advantage, disadvantage, critical hits, and target resistances at the table.</p>
+  </div>
+
+  <section class="section">
+    <p class="section-label">Construct Companion</p>
+    <h2>Shield Guardian</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🛡️ Health</div>
+        <div class="health-display">
+          <output id="guardian-hp" class="health-current" aria-live="polite">142</output>
+          <span class="health-max-label">/ <output id="guardian-max-label">142</output> HP</span>
+        </div>
+        <div class="health-bar" aria-hidden="true"><span id="guardian-health-bar"></span></div>
+        <div class="form-row">
+          <label for="guardian-max">Maximum HP</label>
+          <input id="guardian-max" type="number" min="1" max="999" value="142" />
+        </div>
+        <div class="button-row">
+          <button type="button" class="button button-danger" data-damage="5">Take 5</button>
+          <button type="button" class="button button-danger" data-damage="10">Take 10</button>
+          <button type="button" class="button button-success" data-heal="10">Heal 10</button>
+          <button type="button" class="button button-quiet" id="reset-hp">Reset</button>
+        </div>
+        <div class="form-row">
+          <label for="hp-adjustment">Custom adjustment</label>
+          <div class="inline-control">
+            <input id="hp-adjustment" type="number" min="0" placeholder="Amount" />
+            <button type="button" class="button button-danger" id="apply-damage">Damage</button>
+            <button type="button" class="button button-success" id="apply-healing">Heal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Attack profile</div>
+        <div class="card-sub">Multiattack · two Fist attacks</div>
+        <table class="compact-table">
+          <thead>
+            <tr><th>Attack</th><th>To hit</th><th>Damage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fist</td><td>+7</td><td>2d6 + 4 bludgeoning</td></tr>
+          </tbody>
+        </table>
+        <div class="button-row mt-2">
+          <button type="button" class="button button-primary" id="guardian-fist">Roll one Fist</button>
+          <button type="button" class="button button-primary" id="guardian-multiattack">Roll Multiattack</button>
+        </div>
+        <p class="text-muted mt-2 mb-0">The Shield Guardian has 142 HP, AC 17, and a +7 attack bonus in the 2014 stat block.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Conjure Animals · 2014</p>
+    <h2>Summoned Creature Roller</h2>
+    <p>Choose a creature from the 2014 options below, set how many are attacking, and roll one attack for each creature.</p>
+    <div class="card">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="beast-select">Creature</label>
+          <select id="beast-select">
+            <option value="giant-constrictor">Giant Constrictor Snake · CR 2</option>
+            <option value="dire-wolf">Dire Wolf · CR 1</option>
+            <option value="giant-hyena">Giant Hyena · CR 1</option>
+            <option value="brown-bear">Brown Bear · CR 1</option>
+            <option value="wolf">Wolf · CR 1/4</option>
+            <option value="giant-owl">Giant Owl · CR 1/4</option>
+            <option value="panther">Panther · CR 1/4</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="beast-count">Number attacking</label>
+          <input id="beast-count" type="number" min="1" max="8" value="1" />
+        </div>
+        <div class="form-row">
+          <label for="beast-attack">Attack</label>
+          <select id="beast-attack"></select>
+        </div>
+      </div>
+      <p id="beast-details" class="text-muted mt-2"></p>
+      <div class="button-row">
+        <button type="button" class="button button-primary" id="beast-roll">Roll attacks</button>
+        <button type="button" class="button button-quiet" id="clear-log">Clear roll log</button>
+      </div>
+    </div>
+    <div id="roll-log" class="roll-log mt-2" aria-live="polite">
+      <p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="callout callout-warn">
+      <p class="callout-title">🧪 Rules reminder</p>
+      <p><em>Conjure animals</em> creates fey spirits that take the chosen beast's form. The spell's 2014 text
+      gives the DM control over the creatures, so confirm the final creature choice and behavior with the DM.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · A D&amp;D 5e (2024) Campaign · <a href="index.html">← Back to Home</a></p>
+</footer>
+
+<script>
+  const guardianMax = document.getElementById('guardian-max');
+  const guardianHp = document.getElementById('guardian-hp');
+  const guardianMaxLabel = document.getElementById('guardian-max-label');
+  const guardianHealthBar = document.getElementById('guardian-health-bar');
+  const hpAdjustment = document.getElementById('hp-adjustment');
+  const rollLog = document.getElementById('roll-log');
+  const beastSelect = document.getElementById('beast-select');
+  const beastCount = document.getElementById('beast-count');
+  const beastAttack = document.getElementById('beast-attack');
+  const beastDetails = document.getElementById('beast-details');
+
+  const beasts = {
+    'giant-constrictor': {
+      max: 1,
+      attacks: {
+        bite: { label: 'Bite', bonus: 6, damage: '2d6+4', damageLabel: '2d6 + 4 piercing' },
+        constrict: { label: 'Constrict', bonus: 6, damage: '2d8+4', damageLabel: '2d8 + 4 bludgeoning' }
+      }
+    },
+    'dire-wolf': {
+      max: 2,
+      attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
+    },
+    'giant-hyena': {
+      max: 2,
+      attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
+    },
+    'brown-bear': {
+      max: 2,
+      attacks: {
+        bite: { label: 'Bite', bonus: 5, damage: '1d8+4', damageLabel: '1d8 + 4 piercing' },
+        claws: { label: 'Claws', bonus: 5, damage: '2d6+4', damageLabel: '2d6 + 4 slashing' }
+      }
+    },
+    wolf: {
+      max: 8,
+      attacks: { bite: { label: 'Bite', bonus: 4, damage: '2d4+2', damageLabel: '2d4 + 2 piercing' } }
+    },
+    'giant-owl': {
+      max: 8,
+      attacks: { talons: { label: 'Talons', bonus: 3, damage: '2d6+1', damageLabel: '2d6 + 1 slashing' } }
+    },
+    panther: {
+      max: 8,
+      attacks: {
+        bite: { label: 'Bite', bonus: 4, damage: '1d6+2', damageLabel: '1d6 + 2 piercing' },
+        claws: { label: 'Claws', bonus: 4, damage: '1d4+2', damageLabel: '1d4 + 2 slashing' }
+      }
+    }
+  };
+
+  function rollDie(sides) {
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
+  function rollDamage(formula) {
+    const match = formula.match(/^(\d+)d(\d+)\+(\d+)$/);
+    let total = Number(match[3]);
+    const dice = [];
+    for (let i = 0; i < Number(match[1]); i += 1) {
+      const die = rollDie(Number(match[2]));
+      dice.push(die);
+      total += die;
+    }
+    return { total, dice };
+  }
+
+  function formatBonus(bonus) {
+    return bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  }
+
+  function addLog(message, className) {
+    const emptyMessage = rollLog.querySelector('.text-muted');
+    if (emptyMessage) emptyMessage.remove();
+    const entry = document.createElement('div');
+    entry.className = `roll-entry ${className || ''}`;
+    entry.innerHTML = message;
+    rollLog.prepend(entry);
+  }
+
+  function rollAttack(name, attack, index) {
+    const d20 = rollDie(20);
+    const total = d20 + attack.bonus;
+    const damage = rollDamage(attack.damage);
+    const critical = d20 === 20;
+    const resultClass = d20 === 1 ? 'roll-fumble' : critical ? 'roll-critical' : '';
+    const damageText = critical
+      ? `${damage.dice.concat(damage.dice).join(' + ')} + ${attack.damage.split('+')[1]} = ${damage.total * 2 - Number(attack.damage.split('+')[1])}`
+      : `${damage.dice.join(' + ')} + ${attack.damage.split('+')[1]} = ${damage.total}`;
+    addLog(`<strong>${name}${index ? ` #${index}` : ''} — ${attack.label}</strong>
+      <span class="roll-result ${resultClass}">d20 ${d20} ${formatBonus(attack.bonus)} = ${total}</span>
+      <span class="roll-damage">${damageText} damage · ${attack.damageLabel}</span>`, resultClass);
+  }
+
+  function updateHealth(nextValue) {
+    const max = Math.max(1, Math.min(999, Number(guardianMax.value) || 142));
+    guardianMax.value = max;
+    const current = Math.max(0, Math.min(max, nextValue));
+    guardianHp.value = current;
+    guardianMaxLabel.value = max;
+    guardianHealthBar.style.width = `${(current / max) * 100}%`;
+    guardianHealthBar.classList.toggle('health-critical', current <= max * 0.25);
+    localStorage.setItem('kud-guardian-health', JSON.stringify({ current, max }));
+  }
+
+  function updateBeastAttacks() {
+    const beast = beasts[beastSelect.value];
+    beastCount.max = beast.max;
+    if (Number(beastCount.value) > beast.max) beastCount.value = beast.max;
+    beastAttack.innerHTML = Object.entries(beast.attacks)
+      .map(([key, attack]) => `<option value="${key}">${attack.label} · ${attack.damageLabel}</option>`)
+      .join('');
+    beastDetails.textContent = `Conjure Animals allows up to ${beast.max} ${beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0]}${beast.max === 1 ? '' : 's'} at this CR.`;
+  }
+
+  document.querySelectorAll('[data-damage]').forEach((button) => {
+    button.addEventListener('click', () => updateHealth(Number(guardianHp.value) - Number(button.dataset.damage)));
+  });
+  document.querySelectorAll('[data-heal]').forEach((button) => {
+    button.addEventListener('click', () => updateHealth(Number(guardianHp.value) + Number(button.dataset.heal)));
+  });
+  document.getElementById('reset-hp').addEventListener('click', () => updateHealth(Number(guardianMax.value)));
+  guardianMax.addEventListener('change', () => updateHealth(Number(guardianHp.value)));
+  document.getElementById('apply-damage').addEventListener('click', () => {
+    updateHealth(Number(guardianHp.value) - Math.max(0, Number(hpAdjustment.value) || 0));
+    hpAdjustment.value = '';
+  });
+  document.getElementById('apply-healing').addEventListener('click', () => {
+    updateHealth(Number(guardianHp.value) + Math.max(0, Number(hpAdjustment.value) || 0));
+    hpAdjustment.value = '';
+  });
+  document.getElementById('guardian-fist').addEventListener('click', () => {
+    rollAttack('Shield Guardian', { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' });
+  });
+  document.getElementById('guardian-multiattack').addEventListener('click', () => {
+    const attack = { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' };
+    rollAttack('Shield Guardian', attack, 1);
+    rollAttack('Shield Guardian', attack, 2);
+  });
+  beastSelect.addEventListener('change', updateBeastAttacks);
+  document.getElementById('beast-roll').addEventListener('click', () => {
+    const beast = beasts[beastSelect.value];
+    const attack = beast.attacks[beastAttack.value];
+    for (let i = 1; i <= Number(beastCount.value); i += 1) {
+      rollAttack(beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0], attack, i);
+    }
+  });
+  document.getElementById('clear-log').addEventListener('click', () => {
+    rollLog.innerHTML = '<p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>';
+  });
+
+  const savedHealth = JSON.parse(localStorage.getItem('kud-guardian-health') || 'null');
+  if (savedHealth && Number.isFinite(savedHealth.current) && Number.isFinite(savedHealth.max)) {
+    guardianMax.value = savedHealth.max;
+    updateHealth(savedHealth.current);
+  } else {
+    updateHealth(142);
+  }
+  updateBeastAttacks();
+</script>
+</body>
+</html>
