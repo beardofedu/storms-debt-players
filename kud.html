@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kud's Field Kit — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html">Heroes' Hall</a></li>
+      <li><a href="kud.html" class="active">Kud's Field Kit</a></li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Kud's Field Kit</h1>
+  <p>Evidence, field notes, and an alarming number of summoned animals</p>
+</header>
+
+<main class="container">
+  <div class="callout callout-info">
+    <p class="callout-title">📋 Detective's note</p>
+    <p>This toolkit uses the <strong>2014</strong> Shield Guardian and <strong>2014</strong> <em>conjure animals</em>
+    stat blocks. It rolls the listed attacks; apply advantage, disadvantage, critical hits, and target resistances at the table.</p>
+  </div>
+
+  <section class="section">
+    <p class="section-label">Construct Companion</p>
+    <h2>Shield Guardian</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🛡️ Health</div>
+        <div class="health-display">
+          <output id="guardian-hp" class="health-current" aria-live="polite">142</output>
+          <span class="health-max-label">/ <output id="guardian-max-label">142</output> HP</span>
+        </div>
+        <div class="health-bar" aria-hidden="true"><span id="guardian-health-bar"></span></div>
+        <div class="form-row">
+          <label for="guardian-max">Maximum HP</label>
+          <input id="guardian-max" type="number" min="1" max="999" value="142" />
+        </div>
+        <div class="button-row">
+          <button type="button" class="button button-danger" data-damage="5">Take 5</button>
+          <button type="button" class="button button-danger" data-damage="10">Take 10</button>
+          <button type="button" class="button button-success" data-heal="10">Heal 10</button>
+          <button type="button" class="button button-quiet" id="reset-hp">Reset</button>
+        </div>
+        <div class="form-row">
+          <label for="hp-adjustment">Custom adjustment</label>
+          <div class="inline-control">
+            <input id="hp-adjustment" type="number" min="0" placeholder="Amount" />
+            <button type="button" class="button button-danger" id="apply-damage">Damage</button>
+            <button type="button" class="button button-success" id="apply-healing">Heal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Attack profile</div>
+        <div class="card-sub">Multiattack · two Fist attacks</div>
+        <table class="compact-table">
+          <thead>
+            <tr><th>Attack</th><th>To hit</th><th>Damage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fist</td><td>+7</td><td>2d6 + 4 bludgeoning</td></tr>
+          </tbody>
+        </table>
+        <div class="button-row mt-2">
+          <button type="button" class="button button-primary" id="guardian-fist">Roll one Fist</button>
+          <button type="button" class="button button-primary" id="guardian-multiattack">Roll Multiattack</button>
+        </div>
+        <p class="text-muted mt-2 mb-0">The Shield Guardian has 142 HP, AC 17, and a +7 attack bonus in the 2014 stat block.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Conjure Animals · 2014</p>
+    <h2>Summoned Creature Roller</h2>
+    <p>Choose a creature from the 2014 options below. The number summoned is set automatically from the spell
+    slot you cast it with — twice as many at 5th level, three times as many at 7th level, and four times as
+    many at 9th level — and you can roll one attack for each creature.</p>
+    <div class="card">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="spell-level">Spell slot used</label>
+          <select id="spell-level">
+            <option value="3">3rd level</option>
+            <option value="4">4th level</option>
+            <option value="5">5th level (x2 creatures)</option>
+            <option value="6">6th level (x2 creatures)</option>
+            <option value="7">7th level (x3 creatures)</option>
+            <option value="8">8th level (x3 creatures)</option>
+            <option value="9">9th level (x4 creatures)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="beast-select">Creature</label>
+          <select id="beast-select">
+            <option value="giant-constrictor">Giant Constrictor Snake · CR 2</option>
+            <option value="dire-wolf">Dire Wolf · CR 1</option>
+            <option value="giant-hyena">Giant Hyena · CR 1</option>
+            <option value="brown-bear">Brown Bear · CR 1</option>
+            <option value="deep-rothe">Deep Rothe · CR 1/4</option>
+            <option value="wolf">Wolf · CR 1/4</option>
+            <option value="giant-owl">Giant Owl · CR 1/4</option>
+            <option value="panther">Panther · CR 1/4</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="beast-count">Number attacking</label>
+          <input id="beast-count" type="number" min="1" max="32" value="1" />
+        </div>
+        <div class="form-row">
+          <label for="beast-attack">Attack</label>
+          <select id="beast-attack"></select>
+        </div>
+      </div>
+      <div class="form-row" id="rothe-charge-row" hidden>
+        <label class="checkbox-label">
+          <input type="checkbox" id="rothe-charge" />
+          Charged at least 20 ft. straight toward the target this turn (+2d6 piercing on hit)
+        </label>
+      </div>
+      <p id="beast-details" class="text-muted mt-2"></p>
+      <div class="button-row">
+        <button type="button" class="button button-primary" id="beast-roll">Roll attacks</button>
+        <button type="button" class="button button-quiet" id="clear-log">Clear roll log</button>
+      </div>
+    </div>
+    <div id="roll-log" class="roll-log mt-2" aria-live="polite">
+      <p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="callout callout-warn">
+      <p class="callout-title">🧪 Rules reminder</p>
+      <p><em>Conjure animals</em> creates fey spirits that take the chosen beast's form. The spell's 2014 text
+      gives the DM control over the creatures, so confirm the final creature choice and behavior with the DM.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · A D&amp;D 5e (2024) Campaign · <a href="index.html">← Back to Home</a></p>
+</footer>
+
+<script>
+  const guardianMax = document.getElementById('guardian-max');
+  const guardianHp = document.getElementById('guardian-hp');
+  const guardianMaxLabel = document.getElementById('guardian-max-label');
+  const guardianHealthBar = document.getElementById('guardian-health-bar');
+  const hpAdjustment = document.getElementById('hp-adjustment');
+  const rollLog = document.getElementById('roll-log');
+  const beastSelect = document.getElementById('beast-select');
+  const beastCount = document.getElementById('beast-count');
+  const beastAttack = document.getElementById('beast-attack');
+  const beastDetails = document.getElementById('beast-details');
+  const spellLevel = document.getElementById('spell-level');
+  const rotheChargeRow = document.getElementById('rothe-charge-row');
+  const rotheCharge = document.getElementById('rothe-charge');
+
+  // Base counts per the 2014 Conjure Animals spell (CR 2/1/1-2/1-4 => 1/2/4/8).
+  const beasts = {
+    'giant-constrictor': {
+      baseCount: 1,
+      attacks: {
+        bite: { label: 'Bite', bonus: 6, damage: '2d6+4', damageLabel: '2d6 + 4 piercing' },
+        constrict: { label: 'Constrict', bonus: 6, damage: '2d8+4', damageLabel: '2d8 + 4 bludgeoning' }
+      }
+    },
+    'dire-wolf': {
+      baseCount: 2,
+      attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
+    },
+    'giant-hyena': {
+      baseCount: 2,
+      attacks: { bite: { label: 'Bite', bonus: 5, damage: '2d6+3', damageLabel: '2d6 + 3 piercing' } }
+    },
+    'brown-bear': {
+      baseCount: 2,
+      attacks: {
+        bite: { label: 'Bite', bonus: 5, damage: '1d8+4', damageLabel: '1d8 + 4 piercing' },
+        claws: { label: 'Claws', bonus: 5, damage: '2d6+4', damageLabel: '2d6 + 4 slashing' }
+      }
+    },
+    'deep-rothe': {
+      baseCount: 8,
+      // Deep Rothe (Mordenkainen Presents: Monsters of the Multiverse): Gore +6 to hit, 1d6+4 piercing;
+      // deals an extra 2d6 piercing if it moved at least 20 ft. straight toward the target this turn.
+      attacks: { gore: { label: 'Gore', bonus: 6, damage: '1d6+4', damageLabel: '1d6 + 4 piercing', charge: true } }
+    },
+    wolf: {
+      baseCount: 8,
+      attacks: { bite: { label: 'Bite', bonus: 4, damage: '2d4+2', damageLabel: '2d4 + 2 piercing' } }
+    },
+    'giant-owl': {
+      baseCount: 8,
+      attacks: { talons: { label: 'Talons', bonus: 3, damage: '2d6+1', damageLabel: '2d6 + 1 slashing' } }
+    },
+    panther: {
+      baseCount: 8,
+      attacks: {
+        bite: { label: 'Bite', bonus: 4, damage: '1d6+2', damageLabel: '1d6 + 2 piercing' },
+        claws: { label: 'Claws', bonus: 4, damage: '1d4+2', damageLabel: '1d4 + 2 slashing' }
+      }
+    }
+  };
+
+  // 2014 "At Higher Levels": 5th-level slot = x2, 7th-level slot = x3, 9th-level slot = x4.
+  function countMultiplier(level) {
+    if (level >= 9) return 4;
+    if (level >= 7) return 3;
+    if (level >= 5) return 2;
+    return 1;
+  }
+
+  function rollDie(sides) {
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
+  function rollDamage(formula) {
+    const match = formula.match(/^(\d+)d(\d+)(?:\+(\d+))?$/);
+    let total = match[3] ? Number(match[3]) : 0;
+    const dice = [];
+    for (let i = 0; i < Number(match[1]); i += 1) {
+      const die = rollDie(Number(match[2]));
+      dice.push(die);
+      total += die;
+    }
+    return { total, dice };
+  }
+
+  function formatBonus(bonus) {
+    return bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  }
+
+  function addLog(message, className) {
+    const emptyMessage = rollLog.querySelector('.text-muted');
+    if (emptyMessage) emptyMessage.remove();
+    const entry = document.createElement('div');
+    entry.className = `roll-entry ${className || ''}`;
+    entry.innerHTML = message;
+    rollLog.prepend(entry);
+  }
+
+  function rollAttack(name, attack, index, extraFormula, extraLabel) {
+    const d20 = rollDie(20);
+    const total = d20 + attack.bonus;
+    const critical = d20 === 20;
+    const fumble = d20 === 1;
+    const resultClass = fumble ? 'roll-fumble' : critical ? 'roll-critical' : '';
+
+    const parts = [{ formula: attack.damage, label: attack.damageLabel }];
+    if (extraFormula) parts.push({ formula: extraFormula, label: extraLabel });
+
+    let damageTotal = 0;
+    const breakdown = parts.map((part) => {
+      const rolls = critical ? [rollDamage(part.formula), rollDamage(part.formula)] : [rollDamage(part.formula)];
+      const dice = rolls.flatMap((roll) => roll.dice);
+      const flatBonus = rolls.reduce((sum, roll) => sum + (roll.total - roll.dice.reduce((a, b) => a + b, 0)), 0);
+      const partTotal = dice.reduce((sum, die) => sum + die, 0) + flatBonus;
+      damageTotal += partTotal;
+      const diceText = flatBonus ? `${dice.join('+')}+${flatBonus}` : dice.join('+');
+      return `<span class="roll-part">${partTotal} <span class="roll-part-detail">(${diceText} ${part.label})</span></span>`;
+    });
+
+    const attackHeadline = critical ? 'CRITICAL HIT' : fumble ? 'FUMBLE' : '';
+
+    addLog(`<div class="roll-name">${name}${index ? ` #${index}` : ''} — ${attack.label}</div>
+      <div class="roll-attack-line">
+        <span class="roll-attack-total">${total}</span>
+        <span class="roll-attack-detail">to hit (d20 ${d20} ${formatBonus(attack.bonus)})${attackHeadline ? ` · ${attackHeadline}` : ''}</span>
+      </div>
+      <div class="roll-damage-line">
+        <span class="roll-damage-total">${damageTotal}</span>
+        <span class="roll-damage-detail">damage — ${breakdown.join(' + ')}</span>
+      </div>`, resultClass);
+  }
+
+  function updateHealth(nextValue) {
+    const max = Math.max(1, Math.min(999, Number(guardianMax.value) || 142));
+    guardianMax.value = max;
+    const current = Math.max(0, Math.min(max, nextValue));
+    guardianHp.value = current;
+    guardianMaxLabel.value = max;
+    guardianHealthBar.style.width = `${(current / max) * 100}%`;
+    guardianHealthBar.classList.toggle('health-critical', current <= max * 0.25);
+    localStorage.setItem('kud-guardian-health', JSON.stringify({ current, max }));
+  }
+
+  function ordinal(level) {
+    if (level === 3) return '3rd';
+    if (level === 1) return '1st';
+    if (level === 2) return '2nd';
+    return `${level}th`;
+  }
+
+  function updateBeastAttacks() {
+    const beast = beasts[beastSelect.value];
+    const level = Number(spellLevel.value);
+    const multiplier = countMultiplier(level);
+    const count = beast.baseCount * multiplier;
+    beastCount.max = count;
+    beastCount.value = count;
+    beastAttack.innerHTML = Object.entries(beast.attacks)
+      .map(([key, attack]) => `<option value="${key}">${attack.label} · ${attack.damageLabel}</option>`)
+      .join('');
+    const creatureName = beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0];
+    beastDetails.textContent = `At ${ordinal(level)} level, the 2014 spell summons ${count} ${creatureName}${count === 1 ? '' : 's'} (base of ${beast.baseCount} at CR, ${multiplier === 1 ? 'no multiplier' : `x${multiplier} from the higher-level slot`}). Adjust the attacking count if only some are engaging.`;
+    updateRotheChargeVisibility();
+  }
+
+  function updateRotheChargeVisibility() {
+    const beast = beasts[beastSelect.value];
+    const attack = beast.attacks[beastAttack.value];
+    rotheChargeRow.hidden = beastSelect.value !== "deep-rothe" || !attack || !attack.charge;
+    if (rotheChargeRow.hidden) rotheCharge.checked = false;
+  }
+
+  document.querySelectorAll('[data-damage]').forEach((button) => {
+    button.addEventListener('click', () => updateHealth(Number(guardianHp.value) - Number(button.dataset.damage)));
+  });
+  document.querySelectorAll('[data-heal]').forEach((button) => {
+    button.addEventListener('click', () => updateHealth(Number(guardianHp.value) + Number(button.dataset.heal)));
+  });
+  document.getElementById('reset-hp').addEventListener('click', () => updateHealth(Number(guardianMax.value)));
+  guardianMax.addEventListener('change', () => updateHealth(Number(guardianHp.value)));
+  document.getElementById('apply-damage').addEventListener('click', () => {
+    updateHealth(Number(guardianHp.value) - Math.max(0, Number(hpAdjustment.value) || 0));
+    hpAdjustment.value = '';
+  });
+  document.getElementById('apply-healing').addEventListener('click', () => {
+    updateHealth(Number(guardianHp.value) + Math.max(0, Number(hpAdjustment.value) || 0));
+    hpAdjustment.value = '';
+  });
+  document.getElementById('guardian-fist').addEventListener('click', () => {
+    rollAttack('Shield Guardian', { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' });
+  });
+  document.getElementById('guardian-multiattack').addEventListener('click', () => {
+    const attack = { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' };
+    rollAttack('Shield Guardian', attack, 1);
+    rollAttack('Shield Guardian', attack, 2);
+  });
+  beastSelect.addEventListener('change', updateBeastAttacks);
+  spellLevel.addEventListener('change', updateBeastAttacks);
+  beastAttack.addEventListener('change', updateRotheChargeVisibility);
+  document.getElementById('beast-roll').addEventListener('click', () => {
+    const beast = beasts[beastSelect.value];
+    const attack = beast.attacks[beastAttack.value];
+    const creatureName = beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0];
+    const useCharge = attack.charge && rotheCharge.checked;
+    for (let i = 1; i <= Number(beastCount.value); i += 1) {
+      rollAttack(creatureName, attack, i, useCharge ? '2d6' : null, useCharge ? 'charge (2d6 piercing)' : null);
+    }
+  });
+  document.getElementById('clear-log').addEventListener('click', () => {
+    rollLog.innerHTML = '<p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>';
+  });
+
+  const savedHealth = JSON.parse(localStorage.getItem('kud-guardian-health') || 'null');
+  if (savedHealth && Number.isFinite(savedHealth.current) && Number.isFinite(savedHealth.max)) {
+    guardianMax.value = savedHealth.max;
+    updateHealth(savedHealth.current);
+  } else {
+    updateHealth(142);
+  }
+  updateBeastAttacks();
+</script>
+</body>
+</html>
