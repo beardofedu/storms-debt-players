@@ -615,6 +615,8 @@ blockquote {
 .roll-damage { color: var(--text-muted); }
 .roll-critical .roll-result { color: var(--success); }
 .roll-fumble .roll-result { color: var(--danger); }
+.checkbox-label { display: flex; align-items: center; gap: .5rem; color: var(--text); font-size: .85rem; font-weight: 600; cursor: pointer; }
+.checkbox-label input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 600px) {
