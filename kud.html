@@ -276,9 +276,7 @@
     const damageText = `${allDice.join(' + ')} + ${flatBonus} = ${damageTotal}`;
     const damageLabel = extraFormula ? `${attack.damageLabel} + ${extraLabel}` : attack.damageLabel;
 
-    addLog(`<strong>${name}${index ? ` #${index}` : ''} — ${attack.label}</strong>
-      <span class="roll-result ${resultClass}">d20 ${d20} ${formatBonus(attack.bonus)} = ${total}</span>
-      <span class="roll-damage">${damageText} damage · ${damageLabel}</span>`, resultClass);
+    addLog(`<span class="roll-line ${resultClass}">atk: d20 ${d20} ${formatBonus(attack.bonus)} = ${total} | dmg: ${damageText} | type: ${damageLabel}</span>`, resultClass);
   }
 
   function updateHealth(nextValue) {
@@ -317,7 +315,7 @@
   function updateRotheChargeVisibility() {
     const beast = beasts[beastSelect.value];
     const attack = beast.attacks[beastAttack.value];
-    rotheChargeRow.hidden = !(attack && attack.charge);
+    rotheChargeRow.hidden = beastSelect.value !== "deep-rothe" || !attack || !attack.charge;
     if (rotheChargeRow.hidden) rotheCharge.checked = false;
   }
 

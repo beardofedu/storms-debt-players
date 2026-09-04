@@ -610,11 +610,11 @@ blockquote {
 .compact-table { margin-top: .75rem; }
 .compact-table th, .compact-table td { padding: .5rem .7rem; }
 .roll-log { display: flex; flex-direction: column; gap: .5rem; }
-.roll-entry { display: grid; grid-template-columns: minmax(150px, 1fr) auto 1.5fr; align-items: center; gap: .75rem; padding: .7rem .9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--card); font-size: .85rem; }
-.roll-result { color: var(--lightning); font-weight: 700; white-space: nowrap; }
+.roll-entry { padding: .7rem .9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--card); font-size: .85rem; }
+.roll-line { color: var(--text-muted); font-family: monospace; }
+.roll-line.roll-critical { color: var(--success); }
+.roll-line.roll-fumble { color: var(--danger); }
 .roll-damage { color: var(--text-muted); }
-.roll-critical .roll-result { color: var(--success); }
-.roll-fumble .roll-result { color: var(--danger); }
 .checkbox-label { display: flex; align-items: center; gap: .5rem; color: var(--text); font-size: .85rem; font-weight: 600; cursor: pointer; }
 .checkbox-label input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: var(--accent); }
 
@@ -626,5 +626,4 @@ blockquote {
   .container { padding: 2rem 1rem; }
   table { font-size: .8rem; }
   th, td { padding: .6rem .75rem; }
-  .roll-entry { grid-template-columns: 1fr; gap: .15rem; }
 }
