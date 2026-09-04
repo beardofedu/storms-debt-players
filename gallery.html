@@ -133,7 +133,9 @@
 <!-- Lightbox overlay -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
-  <img id="lightbox-img" src="" alt="" />
+  <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showLightboxOffset(-1)" aria-label="Previous image">&#8249;</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showLightboxOffset(1)" aria-label="Next image">&#8250;</button>
   <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
@@ -143,28 +145,47 @@
 </footer>
 
 <script>
+  var galleryItems = Array.prototype.slice.call(document.querySelectorAll('.gallery-item'));
+  var currentIndex = -1;
+
   function openLightbox(item) {
-    const img = item.querySelector('img');
-    const caption = item.querySelector('.gallery-caption strong');
-    const sub = item.querySelector('.gallery-caption span');
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const lbCap = document.getElementById('lightbox-caption');
+    currentIndex = galleryItems.indexOf(item);
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderLightbox() {
+    if (currentIndex < 0) return;
+    var item = galleryItems[currentIndex];
+    var img = item.querySelector('img');
+    var caption = item.querySelector('.gallery-caption strong');
+    var sub = item.querySelector('.gallery-caption span');
+    var lbImg = document.getElementById('lightbox-img');
+    var lbCap = document.getElementById('lightbox-caption');
 
     lbImg.src = img.src;
     lbImg.alt = img.alt;
     lbCap.textContent = caption.textContent + (sub ? ' — ' + sub.textContent : '');
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  }
+
+  function showLightboxOffset(offset) {
+    if (currentIndex < 0 || galleryItems.length === 0) return;
+    currentIndex = (currentIndex + offset + galleryItems.length) % galleryItems.length;
+    renderLightbox();
   }
 
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
     document.body.style.overflow = '';
+    currentIndex = -1;
   }
 
   document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showLightboxOffset(-1);
+    else if (e.key === 'ArrowRight') showLightboxOffset(1);
   });
 </script>
 
