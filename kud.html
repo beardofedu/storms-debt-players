@@ -261,22 +261,34 @@
     const d20 = rollDie(20);
     const total = d20 + attack.bonus;
     const critical = d20 === 20;
-    const resultClass = d20 === 1 ? 'roll-fumble' : critical ? 'roll-critical' : '';
+    const fumble = d20 === 1;
+    const resultClass = fumble ? 'roll-fumble' : critical ? 'roll-critical' : '';
 
-    const rolls = [rollDamage(attack.damage)];
-    if (critical) rolls.push(rollDamage(attack.damage));
-    if (extraFormula) {
-      rolls.push(rollDamage(extraFormula));
-      if (critical) rolls.push(rollDamage(extraFormula));
-    }
+    const parts = [{ formula: attack.damage, label: attack.damageLabel }];
+    if (extraFormula) parts.push({ formula: extraFormula, label: extraLabel });
 
-    const allDice = rolls.flatMap((roll) => roll.dice);
-    const flatBonus = rolls.reduce((sum, roll) => sum + (roll.total - roll.dice.reduce((a, b) => a + b, 0)), 0);
-    const damageTotal = allDice.reduce((sum, die) => sum + die, 0) + flatBonus;
-    const damageText = `${allDice.join(' + ')} + ${flatBonus} = ${damageTotal}`;
-    const damageLabel = extraFormula ? `${attack.damageLabel} + ${extraLabel}` : attack.damageLabel;
+    let damageTotal = 0;
+    const breakdown = parts.map((part) => {
+      const rolls = critical ? [rollDamage(part.formula), rollDamage(part.formula)] : [rollDamage(part.formula)];
+      const dice = rolls.flatMap((roll) => roll.dice);
+      const flatBonus = rolls.reduce((sum, roll) => sum + (roll.total - roll.dice.reduce((a, b) => a + b, 0)), 0);
+      const partTotal = dice.reduce((sum, die) => sum + die, 0) + flatBonus;
+      damageTotal += partTotal;
+      const diceText = flatBonus ? `${dice.join('+')}+${flatBonus}` : dice.join('+');
+      return `<span class="roll-part">${partTotal} <span class="roll-part-detail">(${diceText} ${part.label})</span></span>`;
+    });
 
-    addLog(`<span class="roll-line ${resultClass}">atk: d20 ${d20} ${formatBonus(attack.bonus)} = ${total} | dmg: ${damageText} | type: ${damageLabel}</span>`, resultClass);
+    const attackHeadline = critical ? 'CRITICAL HIT' : fumble ? 'FUMBLE' : '';
+
+    addLog(`<div class="roll-name">${name}${index ? ` #${index}` : ''} — ${attack.label}</div>
+      <div class="roll-attack-line">
+        <span class="roll-attack-total">${total}</span>
+        <span class="roll-attack-detail">to hit (d20 ${d20} ${formatBonus(attack.bonus)})${attackHeadline ? ` · ${attackHeadline}` : ''}</span>
+      </div>
+      <div class="roll-damage-line">
+        <span class="roll-damage-total">${damageTotal}</span>
+        <span class="roll-damage-detail">damage — ${breakdown.join(' + ')}</span>
+      </div>`, resultClass);
   }
 
   function updateHealth(nextValue) {

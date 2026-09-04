@@ -587,6 +587,7 @@ blockquote {
 
 .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
 .form-row { display: flex; flex-direction: column; gap: .35rem; margin-top: 1rem; }
+.form-row[hidden] { display: none; }
 .form-grid .form-row { margin-top: 0; }
 .form-row label { color: var(--gold); font-size: .8rem; font-weight: 600; }
 .form-row input, .form-row select {
@@ -610,11 +611,24 @@ blockquote {
 .compact-table { margin-top: .75rem; }
 .compact-table th, .compact-table td { padding: .5rem .7rem; }
 .roll-log { display: flex; flex-direction: column; gap: .5rem; }
-.roll-entry { padding: .7rem .9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--card); font-size: .85rem; }
-.roll-line { color: var(--text-muted); font-family: monospace; }
-.roll-line.roll-critical { color: var(--success); }
-.roll-line.roll-fumble { color: var(--danger); }
-.roll-damage { color: var(--text-muted); }
+.roll-entry {
+  padding: .7rem .9rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  font-size: .85rem;
+}
+.roll-entry.roll-critical { border-left-color: var(--success); }
+.roll-entry.roll-fumble { border-left-color: var(--danger); }
+.roll-name { font-family: 'Cinzel', serif; font-size: .85rem; color: var(--lightning); margin-bottom: .4rem; }
+.roll-attack-line, .roll-damage-line { display: flex; align-items: baseline; gap: .5rem; margin-top: .15rem; }
+.roll-attack-total, .roll-damage-total { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.3rem; color: var(--text); min-width: 2ch; }
+.roll-entry.roll-critical .roll-attack-total,
+.roll-entry.roll-critical .roll-damage-total { color: var(--success); }
+.roll-entry.roll-fumble .roll-attack-total { color: var(--danger); }
+.roll-attack-detail, .roll-damage-detail { color: var(--text-muted); font-size: .8rem; }
+.roll-part-detail { color: var(--text-muted); font-size: .78rem; }
 .checkbox-label { display: flex; align-items: center; gap: .5rem; color: var(--text); font-size: .85rem; font-weight: 600; cursor: pointer; }
 .checkbox-label input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: var(--accent); }
 
