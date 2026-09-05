@@ -127,6 +127,10 @@
           <label for="beast-attack">Attack</label>
           <select id="beast-attack"></select>
         </div>
+        <div class="form-row">
+          <label for="estimated-ac">Estimated enemy AC (optional)</label>
+          <input id="estimated-ac" type="number" min="1" max="30" placeholder="e.g. 15" />
+        </div>
       </div>
       <div class="form-row" id="rothe-charge-row" hidden>
         <label class="checkbox-label">
@@ -172,6 +176,7 @@
   const spellLevel = document.getElementById('spell-level');
   const rotheChargeRow = document.getElementById('rothe-charge-row');
   const rotheCharge = document.getElementById('rothe-charge');
+  const estimatedAc = document.getElementById('estimated-ac');
 
   // Base counts per the 2014 Conjure Animals spell (CR 2/1/1-2/1-4 => 1/2/4/8).
   const beasts = {
@@ -282,13 +287,30 @@
 
     addLog(`<div class="roll-name">${name}${index ? ` #${index}` : ''} — ${attack.label}</div>
       <div class="roll-attack-line">
-        <span class="roll-attack-total">${total}</span>
+        <span class="roll-attack-total" data-attack-total="${total}">${total}</span>
         <span class="roll-attack-detail">to hit (d20 ${d20} ${formatBonus(attack.bonus)})${attackHeadline ? ` · ${attackHeadline}` : ''}</span>
       </div>
       <div class="roll-damage-line">
         <span class="roll-damage-total">${damageTotal}</span>
         <span class="roll-damage-detail">damage — ${breakdown.join(' + ')}</span>
       </div>`, resultClass);
+    evaluateHits();
+  }
+
+  function getEstimatedAc() {
+    const value = Number(estimatedAc.value);
+    return estimatedAc.value !== '' && Number.isFinite(value) ? value : null;
+  }
+
+  // Marks each logged attack total as a hit (bold + highlighted) whenever it meets or
+  // beats the estimated AC. Re-runs on every roll and every AC edit, so entering (or
+  // changing) the AC after rolls have already happened re-applies bolding retroactively.
+  function evaluateHits() {
+    const ac = getEstimatedAc();
+    rollLog.querySelectorAll('.roll-attack-total[data-attack-total]').forEach((el) => {
+      const total = Number(el.dataset.attackTotal);
+      el.classList.toggle('roll-attack-hit', ac !== null && total >= ac);
+    });
   }
 
   function updateHealth(nextValue) {
@@ -358,6 +380,7 @@
   beastSelect.addEventListener('change', updateBeastAttacks);
   spellLevel.addEventListener('change', updateBeastAttacks);
   beastAttack.addEventListener('change', updateRotheChargeVisibility);
+  estimatedAc.addEventListener('input', evaluateHits);
   document.getElementById('beast-roll').addEventListener('click', () => {
     const beast = beasts[beastSelect.value];
     const attack = beast.attacks[beastAttack.value];
