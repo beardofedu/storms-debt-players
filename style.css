@@ -675,6 +675,9 @@ blockquote {
 .inline-control { display: flex; gap: .4rem; flex-wrap: wrap; }
 .inline-control input { flex: 1 1 90px; min-width: 90px; }
 .health-display { display: flex; align-items: baseline; gap: .4rem; margin: .5rem 0 .75rem; }
+.health-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.health-title-row .card-title { margin-bottom: 0; }
+.health-ac { color: var(--text-muted); font-weight: 600; text-align: right; }
 .health-current { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--lightning); }
 .health-max-label { color: var(--text-muted); }
 .health-bar { height: 10px; overflow: hidden; border-radius: 5px; background: var(--surface); border: 1px solid var(--border); }
@@ -702,6 +705,12 @@ blockquote {
 .roll-attack-total.roll-attack-hit { font-weight: 900; color: var(--lightning); text-decoration: underline; text-underline-offset: .15em; }
 .roll-attack-detail, .roll-damage-detail { color: var(--text-muted); font-size: .8rem; }
 .roll-part-detail { color: var(--text-muted); font-size: .78rem; }
+.roll-summary { padding: 1rem; border: 1px solid var(--accent); border-radius: 6px; background: rgba(56,139,253,.08); }
+.roll-summary-title { font-family: 'Cinzel', serif; color: var(--lightning); font-size: .95rem; }
+.roll-summary-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: .75rem; margin: .75rem 0; }
+.roll-summary-stats div { display: flex; flex-direction: column; gap: .1rem; }
+.roll-summary-stats strong { font-family: 'Cinzel', serif; color: var(--text); font-size: 1.35rem; }
+.roll-summary-stats span { color: var(--text-muted); font-size: .75rem; font-weight: 600; }
 .checkbox-label { display: flex; align-items: center; gap: .5rem; color: var(--text); font-size: .85rem; font-weight: 600; cursor: pointer; }
 .checkbox-label input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: var(--accent); }
 
