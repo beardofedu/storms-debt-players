@@ -91,7 +91,7 @@
       <button type="button" class="button button-quiet" id="clear-guardian-log">Reset rolls</button>
     </div>
     <div id="guardian-roll-log" class="roll-log mt-2" aria-live="polite">
-      <p class="text-muted">Shield Guardian rolls will appear here.</p>
+      <p class="text-muted roll-log-empty">Shield Guardian rolls will appear here.</p>
     </div>
   </section>
 
@@ -157,7 +157,7 @@
       <button type="button" class="button button-quiet" id="clear-log">Reset rolls</button>
     </div>
     <div id="roll-log" class="roll-log mt-2" aria-live="polite">
-      <p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>
+      <p class="text-muted roll-log-empty">Rolls will appear here. May the evidence be conclusive.</p>
     </div>
   </section>
 
@@ -268,7 +268,7 @@
   }
 
   function addLog(log, message, className) {
-    const emptyMessage = log.querySelector('.text-muted');
+    const emptyMessage = log.querySelector('.roll-log-empty');
     if (emptyMessage) emptyMessage.remove();
     const entry = document.createElement('div');
     entry.className = `roll-entry ${className || ''}`;
@@ -439,7 +439,7 @@
     rollAttack('Shield Guardian', attack, 2, null, null, guardianRollLog);
   });
   document.getElementById('clear-guardian-log').addEventListener('click', () => {
-    guardianRollLog.innerHTML = '<p class="text-muted">Shield Guardian rolls will appear here.</p>';
+    guardianRollLog.innerHTML = '<p class="text-muted roll-log-empty">Shield Guardian rolls will appear here.</p>';
   });
   beastSelect.addEventListener('change', updateBeastAttacks);
   spellLevel.addEventListener('change', updateBeastAttacks);
@@ -458,7 +458,7 @@
     updateRollSummaries();
   });
   document.getElementById('clear-log').addEventListener('click', () => {
-    rollLog.innerHTML = '<p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>';
+    rollLog.innerHTML = '<p class="text-muted roll-log-empty">Rolls will appear here. May the evidence be conclusive.</p>';
     rollBatches.length = 0;
   });
 
