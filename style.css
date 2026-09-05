@@ -675,6 +675,9 @@ blockquote {
 .inline-control { display: flex; gap: .4rem; flex-wrap: wrap; }
 .inline-control input { flex: 1 1 90px; min-width: 90px; }
 .health-display { display: flex; align-items: baseline; gap: .4rem; margin: .5rem 0 .75rem; }
+.health-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.health-title-row .card-title { margin-bottom: 0; }
+.health-ac { color: var(--text-muted); font-weight: 600; text-align: right; }
 .health-current { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--lightning); }
 .health-max-label { color: var(--text-muted); }
 .health-bar { height: 10px; overflow: hidden; border-radius: 5px; background: var(--surface); border: 1px solid var(--border); }

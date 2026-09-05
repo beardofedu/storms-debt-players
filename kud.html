@@ -40,7 +40,10 @@
     <h2>Shield Guardian</h2>
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">🛡️ Health</div>
+        <div class="health-title-row">
+          <div class="card-title">🛡️ Health</div>
+          <span class="health-ac">AC 17</span>
+        </div>
         <div class="health-display">
           <output id="guardian-hp" class="health-current" aria-live="polite">142</output>
           <span class="health-max-label">/ <output id="guardian-max-label">142</output> HP</span>
@@ -81,7 +84,6 @@
           <button type="button" class="button button-primary" id="guardian-fist">Roll one Fist</button>
           <button type="button" class="button button-primary" id="guardian-multiattack">Roll Multiattack</button>
         </div>
-        <p class="text-muted mt-2 mb-0">The Shield Guardian has 142 HP, AC 17, and a +7 attack bonus in the 2014 stat block.</p>
       </div>
     </div>
   </section>
@@ -128,7 +130,7 @@
           <select id="beast-attack"></select>
         </div>
         <div class="form-row">
-          <label for="estimated-ac">Estimated enemy AC (optional)</label>
+          <label for="estimated-ac">Est. AC (opt.)</label>
           <input id="estimated-ac" type="number" min="1" max="30" placeholder="e.g. 15" />
         </div>
       </div>
