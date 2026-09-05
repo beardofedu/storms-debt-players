@@ -699,6 +699,7 @@ blockquote {
 .roll-entry.roll-critical .roll-attack-total,
 .roll-entry.roll-critical .roll-damage-total { color: var(--success); }
 .roll-entry.roll-fumble .roll-attack-total { color: var(--danger); }
+.roll-attack-total.roll-attack-hit { font-weight: 900; color: var(--lightning); text-decoration: underline; text-underline-offset: .15em; }
 .roll-attack-detail, .roll-damage-detail { color: var(--text-muted); font-size: .8rem; }
 .roll-part-detail { color: var(--text-muted); font-size: .78rem; }
 .checkbox-label { display: flex; align-items: center; gap: .5rem; color: var(--text); font-size: .85rem; font-weight: 600; cursor: pointer; }
