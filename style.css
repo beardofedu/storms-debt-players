@@ -685,6 +685,7 @@ blockquote {
 .health-bar span.health-critical { background: var(--danger); }
 .compact-table { margin-top: .75rem; }
 .compact-table th, .compact-table td { padding: .5rem .7rem; }
+.roll-log-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .roll-log { display: flex; flex-direction: column; gap: .5rem; }
 .roll-entry {
   padding: .7rem .9rem;
