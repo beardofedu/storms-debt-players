@@ -482,7 +482,8 @@ blockquote {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
+  justify-content: start;
   gap: 1rem;
 }
 
@@ -614,7 +615,7 @@ blockquote {
 }
 
 @media (max-width: 900px) {
-  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 150px)); }
 }
 
 @media (max-width: 500px) {
