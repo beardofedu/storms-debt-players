@@ -20,9 +20,9 @@ jobs:
       - name: Rebuild gallery.html from gallery/ images
         run: |
           # Build the replacement block from image files in gallery/,
-          # ordered by the commit date each image was first added.
+          # ordered by the commit date each image was first added and
+          # grouped under a header for each distinct date.
           {
-            echo '      <!-- GALLERY-START (auto-generated — do not edit between these markers) -->'
             find gallery/ -maxdepth 1 -type f \
               \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
                  -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
@@ -35,11 +35,38 @@ jobs:
                   if [ -z "$ts" ]; then
                     ts=$(date +%s)
                   fi
-                  printf '%s\t%s\n' "$ts" "$img"
+                  date_key=$(date -u -d "@${ts}" +%Y-%m-%d)
+                  date_label=$(date -u -d "@${ts}" "+%B %-d, %Y")
+                  printf '%s\t%s\t%s\t%s\n' "$ts" "$date_key" "$date_label" "$img"
                 done \
               | sort -n -k1,1 \
-              | cut -f2- \
-              | while IFS= read -r img; do
+              > /tmp/gallery_sorted.tsv
+
+            # Count how many photos fall on each date, for the header badge.
+            cut -f2 /tmp/gallery_sorted.tsv | sort | uniq -c \
+              | awk '{print $2"\t"$1}' > /tmp/gallery_counts.tsv
+
+            echo '      <!-- GALLERY-START (auto-generated — do not edit between these markers) -->'
+            echo ''
+            echo '      <div class="gallery-timeline">'
+
+            current_date_key=""
+            while IFS=$'\t' read -r ts date_key date_label img; do
+              if [ "$date_key" != "$current_date_key" ]; then
+                if [ -n "$current_date_key" ]; then
+                  echo '          </div>'
+                  echo '        </div>'
+                fi
+                count=$(awk -F'\t' -v d="$date_key" '$1==d{print $2}' /tmp/gallery_counts.tsv)
+                photo_word="photo"
+                [ "$count" != "1" ] && photo_word="photos"
+                echo ''
+                echo "        <div class=\"gallery-date-group\" data-date=\"${date_key}\">"
+                echo "          <h3 class=\"gallery-date-header\">${date_label} <span class=\"gallery-date-count\">${count} ${photo_word}</span></h3>"
+                echo '          <div class="gallery-grid">'
+                current_date_key="$date_key"
+              fi
+
               filename=$(basename "$img")
               name_raw="${filename%.*}"
               title=$(echo "$name_raw" | sed -E 's/^session-[0-9]+-//' | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
@@ -57,11 +84,19 @@ jobs:
               fi
 
               echo ""
-              echo "      <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\"${session_attr}>"
-              echo "        <img src=\"${img}\" alt=\"${alt_text}\" loading=\"lazy\" />"
-              echo "      </div>"
-            done
-            echo ""
+              echo "            <div class=\"gallery-item\" tabindex=\"0\" role=\"button\" onclick=\"openLightbox(this)\" onkeydown=\"if(event.key==='Enter')openLightbox(this)\"${session_attr} data-date=\"${date_label}\">"
+              echo "              <img src=\"${img}\" alt=\"${alt_text}\" loading=\"lazy\" />"
+              echo "            </div>"
+            done < /tmp/gallery_sorted.tsv
+
+            if [ -n "$current_date_key" ]; then
+              echo '          </div>'
+              echo '        </div>'
+            fi
+
+            echo ''
+            echo '      </div>'
+            echo ''
             echo '      <!-- GALLERY-END -->'
           } > /tmp/gallery_block.html
 
