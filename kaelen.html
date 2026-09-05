@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaelen's Battle Guide — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="ability-page">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html">Heroes' Hall</a></li>
+      <li><a href="kud.html">Kud's Field Kit</a></li>
+      <li><a href="kaelen.html" class="active">Kaelen's Guide</a></li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="kaelen-header">
+  <div class="kaelen-header-inner">
+    <div>
+      <p class="section-label">Level 13 Firbolg · Path of the World Tree</p>
+      <h1>Kaelen Rootwalker</h1>
+      <p class="kaelen-tagline">Stand tall. Reach far. Pull friends to safety and enemies into the roots.</p>
+    </div>
+    <div class="kaelen-header-actions">
+      <a class="ddb-link" href="https://www.dndbeyond.com/characters/163026270" target="_blank" rel="noopener">Open D&amp;D Beyond</a>
+      <button class="print-button" type="button" onclick="window.print()">Print this guide</button>
+    </div>
+  </div>
+</header>
+
+<main class="ability-sheet">
+  <section class="stat-strip" aria-label="Kaelen's key statistics">
+    <div><span>AC</span><strong>18</strong></div>
+    <div><span>HP</span><strong>148</strong></div>
+    <div><span>Speed</span><strong>40 ft.</strong></div>
+    <div><span>Initiative</span><strong>+2</strong></div>
+    <div><span>STR</span><strong>20 (+5)</strong></div>
+    <div><span>Save DC</span><strong>18</strong></div>
+    <div><span>Rages</span><strong>5 / Long Rest</strong></div>
+  </section>
+
+  <section class="turn-card">
+    <p class="section-label">Default combat plan</p>
+    <ol class="turn-flow">
+      <li><strong>Bonus Action:</strong> Rage, then move up to 20 ft. with Instinctive Pounce.</li>
+      <li><strong>Action:</strong> Attack twice with Rootcleaver from up to 15 ft. away.</li>
+      <li><strong>First good hit:</strong> add Heavy Weapon Master and Predatory Growth.</li>
+      <li><strong>Choose control:</strong> Cleave, Push, Topple, or trade Reckless Advantage for a Brutal Strike.</li>
+      <li><strong>Start each turn:</strong> give a nearby ally temporary HP with Life-Giving Force.</li>
+    </ol>
+  </section>
+
+  <div class="ability-grid">
+    <section class="ability-panel ability-attacks">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">⚔</span>
+        <div><p class="section-label">On your turn</p><h2>Attacks &amp; Control</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Rootcleaver</strong><span>Attack · 2 per action</span></div>
+        <p><strong>+12 to hit</strong> · 15-ft. reach · <strong>1d12 + 10 slashing</strong> while Raging (1d12 + 7 otherwise).</p>
+        <p class="ability-note">It is a +2 magic greataxe and returns to your hand at the end of your turn if it is within 30 ft. and not held by another creature.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Stack damage on one hit</strong><span>Once per turn</span></div>
+        <p><strong>Heavy Weapon Master:</strong> +5 damage on a Heavy-weapon hit made as part of the Attack action.</p>
+        <p><strong>Predatory Growth:</strong> while Raging, +1d6 necrotic damage and gain that much temporary HP.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Weapon mastery</strong><span>On a hit</span></div>
+        <p><strong>Cleave:</strong> once per turn, attack a second creature within 5 ft. of the first. Do not add STR to the second hit's damage.</p>
+        <p><strong>Battering Roots:</strong> on your turn, Rootcleaver has 15-ft. reach and can also <strong>Push 10 ft.</strong> or <strong>Topple</strong> (DC 18 CON) in addition to Cleave.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Brutal Strike</strong><span>Trade Reckless Advantage</span></div>
+        <p>Give up Advantage from Reckless Attack on one attack. On a hit, deal <strong>+1d10</strong> weapon damage and choose one:</p>
+        <div class="choice-grid">
+          <span><b>Forceful:</b> push 15 ft.; follow half speed safely.</span>
+          <span><b>Hamstring:</b> speed −15 ft. until your next turn.</span>
+          <span><b>Staggering:</b> Disadvantage on next save; no opportunity attacks.</span>
+          <span><b>Sundering:</b> next ally attack gets +5.</span>
+        </div>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Grasp of the Old Roots</strong><span>No action · At will</span></div>
+        <p>After striking the ground or a creature, chosen creatures in 15 ft. make a <strong>DC 18 STR save</strong>. Fail: Restrained through the end of your next turn. Success: speed halved until the start of your next turn. The area is difficult terrain through the end of your next turn.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Other attacks</strong></div>
+        <p><strong>Thorn Whip:</strong> +7, 30 ft., 3d6 piercing and pull 10 ft. · <strong>Unarmed:</strong> +10, 9 bludgeoning while Raging; Grapple or Shove DC 18.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-defenses">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">🛡</span>
+        <div><p class="section-label">Stay standing</p><h2>Defensives</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Rage</strong><span>Bonus Action · 5 / Long Rest</span></div>
+        <p>Resistance to <strong>bludgeoning, piercing, and slashing</strong>; Advantage on STR checks and STR saves; +3 damage with STR-based attacks.</p>
+        <p class="ability-note">Regain one use on a Short Rest. Extend it with a Bonus Action when needed; maximum duration 10 minutes.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Relentless Rage</strong><span>When dropped to 0 HP</span></div>
+        <p>While Raging, make a <strong>DC 10 CON save</strong>. On success, stay up at <strong>26 HP</strong>. DC rises by 5 after each success and resets on a Short or Long Rest.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Hidden Step</strong><span>Bonus Action · 5 / Long Rest</span></div>
+        <p>Become Invisible until the start of your next turn, or until you attack, deal damage, or force a saving throw.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Gear defenses</strong></div>
+        <p><strong>Ring + Cloak of Protection:</strong> their AC and saving throw bonuses are already included. <strong>Adamantine chain shirt:</strong> critical hits against you become normal hits.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-healing">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">✚</span>
+        <div><p class="section-label">Temporary HP &amp; recovery</p><h2>Healing &amp; Support</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Vitality of the Tree</strong><span>When Rage begins</span></div>
+        <p>Gain <strong>13 temporary HP</strong>. Temporary HP does not stack; keep whichever amount is higher.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Life-Giving Force</strong><span>Start of every Raging turn</span></div>
+        <p>Choose <strong>another creature within 10 ft.</strong> to gain <strong>3d6 temporary HP</strong>. Any remaining points vanish when your Rage ends.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Predatory Growth</strong><span>Once per turn while Raging</span></div>
+        <p>When Rootcleaver hits, its extra 1d6 necrotic damage also gives <strong>you</strong> the same amount of temporary HP.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Remember:</strong> Kaelen does not have direct healing on the sheet. These abilities prevent damage or keep him standing; they do not restore another creature's lost HP.</p>
+    </section>
+
+    <section class="ability-panel ability-reactions">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">↯</span>
+        <div><p class="section-label">Outside your turn</p><h2>Reactions</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Branches of the Tree</strong><span>Reaction · While Raging</span></div>
+        <p>When a creature you can see starts its turn within 30 ft., teleport it to an empty space within 5 ft. of you. An unwilling target makes a <strong>DC 18 STR save</strong>; on a failed save, you can also reduce its speed to 0 for that turn.</p>
+        <p class="ability-note">Use it to rescue an ally, pull an enemy away from a vulnerable friend, or lock a target beside you.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Opportunity Attack</strong><span>Reaction</span></div>
+        <p>Make one melee attack when a creature leaves your reach without Disengaging.</p>
+        <p class="ability-note"><strong>Important:</strong> Battering Roots extends reach only on your turn, so your normal opportunity-attack reach is 5 ft.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Reaction check:</strong> At the start of every nearby creature's turn, ask whether Branches of the Tree would improve the battlefield.</p>
+    </section>
+  </div>
+
+  <section class="quick-reminders">
+    <div><strong>Reckless Attack</strong><span>Advantage for you, then attacks against you have Advantage until your next turn.</span></div>
+    <div><strong>Hew</strong><span>After a melee critical hit or dropping a creature to 0 HP, attack again with that weapon as a Bonus Action.</span></div>
+    <div><strong>Primal Knowledge</strong><span>While Raging, use STR for Acrobatics, Intimidation, Perception, Stealth, or Survival.</span></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · Kaelen's Level 13 quick reference · <a href="party.html">← Back to the Party</a></p>
+</footer>
+
+</body>
+</html>

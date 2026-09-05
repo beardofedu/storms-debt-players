@@ -440,6 +440,339 @@ blockquote {
   image-rendering: auto;
 }
 
+.character-guide-link {
+  color: var(--lightning);
+  background: rgba(240,230,140,.08);
+  border-color: rgba(240,230,140,.35);
+}
+
+/* ── Kaelen Ability Guide ────────────────────────────────────── */
+.ability-page {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(86,211,100,.08), transparent 26rem),
+    radial-gradient(circle at 85% 10%, rgba(227,179,65,.07), transparent 24rem),
+    var(--bg);
+}
+
+.kaelen-header {
+  border-bottom: 1px solid rgba(86,211,100,.3);
+  background: linear-gradient(135deg, #101b17, #18251d 55%, #151a17);
+  padding: 2rem 1.5rem;
+}
+
+.kaelen-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.kaelen-tagline {
+  color: var(--text-muted);
+  font-family: 'Crimson Text', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  margin: .4rem 0 0;
+}
+
+.kaelen-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.kaelen-header-actions .ddb-link { margin-top: 0; }
+
+.print-button {
+  background: rgba(86,211,100,.12);
+  border: 1px solid rgba(86,211,100,.4);
+  border-radius: 6px;
+  color: #8ee99a;
+  cursor: pointer;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: .42rem .75rem;
+}
+
+.print-button:hover {
+  border-color: var(--success);
+  color: #b2f5ba;
+}
+
+.ability-sheet {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .55rem;
+  margin-bottom: 1rem;
+}
+
+.stat-strip div {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .65rem .5rem;
+  text-align: center;
+}
+
+.stat-strip span {
+  display: block;
+  color: var(--text-muted);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.stat-strip strong {
+  display: block;
+  color: var(--lightning);
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+}
+
+.turn-card {
+  background: linear-gradient(90deg, rgba(86,211,100,.1), rgba(227,179,65,.06));
+  border: 1px solid rgba(86,211,100,.35);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  padding: .85rem 1rem;
+}
+
+.turn-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .65rem;
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+.turn-flow li {
+  border-left: 2px solid rgba(86,211,100,.45);
+  color: var(--text-muted);
+  font-size: .78rem;
+  line-height: 1.45;
+  margin: 0;
+  padding-left: .55rem;
+}
+
+.turn-flow strong { color: var(--text); }
+
+.ability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ability-panel {
+  background: rgba(22,27,34,.94);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  break-inside: avoid;
+}
+
+.ability-attacks { border-top: 3px solid #f0883e; }
+.ability-defenses { border-top: 3px solid var(--accent); }
+.ability-healing { border-top: 3px solid var(--success); }
+.ability-reactions { border-top: 3px solid #bc8cff; }
+
+.ability-heading {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-bottom: .7rem;
+}
+
+.ability-heading .section-label { margin-bottom: .12rem; }
+.ability-heading h2 { font-size: 1.25rem; margin: 0; }
+
+.ability-icon {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--lightning);
+  font-size: 1.1rem;
+  flex: 0 0 auto;
+}
+
+.ability-item {
+  border-top: 1px solid var(--border);
+  padding: .65rem 0;
+}
+
+.ability-item:first-of-type { border-top: 0; }
+
+.ability-item p {
+  font-size: .8rem;
+  line-height: 1.48;
+  margin-bottom: .25rem;
+}
+
+.ability-item.compact { padding-bottom: 0; }
+
+.ability-featured {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(240,230,140,.18) !important;
+  border-radius: 6px;
+  margin: 0 -.35rem .25rem;
+  padding: .65rem;
+}
+
+.ability-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .25rem;
+}
+
+.ability-name strong {
+  color: var(--lightning);
+  font-family: 'Cinzel', serif;
+  font-size: .88rem;
+}
+
+.ability-name span {
+  color: var(--text-muted);
+  font-size: .68rem;
+  font-weight: 700;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.ability-note {
+  color: var(--text-muted);
+  font-size: .73rem !important;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .3rem .75rem;
+  color: var(--text-muted);
+  font-size: .72rem;
+  line-height: 1.4;
+}
+
+.choice-grid b { color: var(--gold); }
+
+.panel-reminder {
+  background: rgba(255,255,255,.03);
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-size: .75rem;
+  margin-top: .6rem;
+  padding: .6rem .7rem;
+}
+
+.quick-reminders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin-top: 1rem;
+}
+
+.quick-reminders div {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .7rem .8rem;
+}
+
+.quick-reminders strong {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: .78rem;
+}
+
+.quick-reminders span {
+  color: var(--text-muted);
+  display: block;
+  font-size: .7rem;
+  line-height: 1.4;
+  margin-top: .2rem;
+}
+
+@media (max-width: 850px) {
+  .kaelen-header-inner { align-items: flex-start; flex-direction: column; }
+  .kaelen-header-actions { justify-content: flex-start; }
+  .stat-strip { grid-template-columns: repeat(4, 1fr); }
+  .turn-flow { grid-template-columns: 1fr; }
+  .ability-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+  .stat-strip { grid-template-columns: repeat(2, 1fr); }
+  .choice-grid, .quick-reminders { grid-template-columns: 1fr; }
+}
+
+@media print {
+  @page { size: landscape; margin: .2in; }
+  .ability-page { background: #fff; color: #111; font-size: 8px; }
+  .ability-page .site-nav,
+  .ability-page .site-footer,
+  .kaelen-header-actions { display: none; }
+  .kaelen-header {
+    background: none;
+    border-color: #888;
+    padding: 0 0 .06in;
+  }
+  .kaelen-header h1 { font-size: 18px; }
+  .kaelen-tagline { display: none; }
+  .kaelen-header h1,
+  .ability-page h2,
+  .ability-page strong,
+  .ability-name strong { color: #111; }
+  .kaelen-tagline,
+  .ability-page p,
+  .turn-flow li,
+  .ability-note,
+  .panel-reminder,
+  .quick-reminders span { color: #333; }
+  .ability-sheet { max-width: none; padding: .06in 0 0; }
+  .stat-strip { gap: .035in; margin-bottom: .045in; }
+  .stat-strip div { background: none; border-color: #aaa; padding: .025in; }
+  .stat-strip span { color: #444; }
+  .stat-strip strong { color: #111; font-size: 8px; }
+  .turn-card { background: none; border-color: #777; margin-bottom: .045in; padding: .035in; }
+  .turn-flow { gap: .035in; }
+  .turn-flow li { color: #222; font-size: 6.2px; line-height: 1.2; }
+  .ability-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .045in; }
+  .ability-panel { background: none; border-color: #777; padding: .045in; }
+  .ability-heading { margin-bottom: .015in; }
+  .ability-heading h2 { font-size: 9px; }
+  .ability-icon { display: none; }
+  .ability-item { border-color: #bbb; padding: .02in 0; }
+  .ability-featured { background: none; border-color: #999 !important; padding: .025in; }
+  .ability-item p { color: #222; font-size: 6.2px; line-height: 1.18; margin-bottom: .012in; }
+  .ability-name { gap: .03in; margin-bottom: .01in; }
+  .ability-name strong { font-size: 6.8px; }
+  .ability-name span, .choice-grid, .panel-reminder { color: #333; font-size: 5.7px; line-height: 1.18; }
+  .choice-grid { grid-template-columns: 1fr; gap: .01in; }
+  .panel-reminder { margin-top: .025in; padding: .025in; }
+  .quick-reminders { gap: .035in; margin-top: .04in; }
+  .quick-reminders div { background: none; border-color: #999; padding: .025in; }
+  .quick-reminders strong { font-size: 6.5px; }
+  .quick-reminders span { font-size: 5.8px; line-height: 1.18; }
+  .section-label { color: #333; }
+}
+
 /* ── Gallery ──────────────────────────────────────────────────── */
 .gallery-timeline {
   margin-top: 1.5rem;
