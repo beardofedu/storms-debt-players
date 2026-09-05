@@ -1,0 +1,60 @@
+name: Delete Merged Branches
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Delete branches merged into main
+        run: |
+          set -euo pipefail
+
+          # Branches that must never be deleted, even if git considers
+          # them "merged" into main.
+          protected_branches="main master develop"
+
+          git fetch origin --prune
+
+          git for-each-ref --format='%(refname:short)' refs/remotes/origin \
+            | sed 's#^origin/##' \
+            | grep -v '^HEAD$' \
+            > /tmp/all_branches.txt || true
+
+          git branch -r --merged origin/main --format='%(refname:short)' \
+            | sed 's#^origin/##' \
+            | grep -v '^HEAD$' \
+            > /tmp/merged_branches.txt || true
+
+          while IFS= read -r branch; do
+            [ -z "$branch" ] && continue
+
+            skip=false
+            for protected in $protected_branches; do
+              if [ "$branch" = "$protected" ]; then
+                skip=true
+                break
+              fi
+            done
+            if [ "$skip" = true ]; then
+              echo "Skipping protected branch: $branch"
+              continue
+            fi
+
+            echo "Deleting merged branch: $branch"
+            git push origin --delete "$branch" || echo "Failed to delete $branch (may already be gone)"
+          done < /tmp/merged_branches.txt
