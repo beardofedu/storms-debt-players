@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asteri's Battle Guide — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="ability-page">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html">Heroes' Hall</a></li>
+      <li><a href="kud.html">Kud's Field Kit</a></li>
+      <li class="nav-dropdown">
+        <a href="party.html" class="nav-dropdown-toggle active">Player Guides <span class="nav-dropdown-caret" aria-hidden="true">&#9662;</span></a>
+        <ul class="nav-dropdown-menu">
+        <li><a href="kaelen.html">Kaelen</a></li>
+        <li><a href="leo.html">Leo</a></li>
+        <li><a href="asteri.html" class="active">Asteri</a></li>
+        <li><a href="jack.html">Jack</a></li>
+        <li><a href="marlo.html">Marlo</a></li>
+        <li><a href="vesha.html">Vesha</a></li>
+        </ul>
+      </li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="kaelen-header">
+  <div class="kaelen-header-inner">
+    <div>
+      <p class="section-label">Level 13 Aarakocra · Ranger</p>
+      <h1>Asteri</h1>
+      <p class="kaelen-tagline">Mark the target, drop it from above, and never let it walk away.</p>
+    </div>
+    <div class="kaelen-header-actions">
+      <a class="ddb-link" href="https://www.dndbeyond.com/characters/110122869" target="_blank" rel="noopener">Open D&amp;D Beyond</a>
+      <button class="print-button" type="button" onclick="window.print()">Print this guide</button>
+    </div>
+  </div>
+</header>
+
+<main class="ability-sheet">
+  <section class="stat-strip" aria-label="Asteri's key statistics">
+    <div><span>AC</span><strong>17</strong></div>
+    <div><span>HP</span><strong>108</strong></div>
+    <div><span>Speed</span><strong>35 ft. (Fly)</strong></div>
+    <div><span>Initiative</span><strong>+5</strong></div>
+    <div><span>DEX</span><strong>20 (+5)</strong></div>
+    <div><span>Save DC</span><strong>17</strong></div>
+    <div><span>Tireless</span><strong>1d8 + 4 Temp HP</strong></div>
+  </section>
+
+  <section class="turn-card">
+    <p class="section-label">Default combat plan</p>
+    <ol class="turn-flow">
+      <li><strong>Bonus Action:</strong> Cast Hunter's Mark on the priority target if it isn't already active.</li>
+      <li><strong>Action:</strong> Attack twice with the Bow of the Verdant Hunt from range.</li>
+      <li><strong>Melee threat closing in?</strong> Use flight to reposition to high ground or out of reach.</li>
+      <li><strong>Marked target trying to flee?</strong> Ensnaring Strike or Beast of the Land's prone effect to stop it.</li>
+      <li><strong>Rest between fights:</strong> Tireless for temporary HP if no one is topped off.</li>
+    </ol>
+  </section>
+
+  <div class="ability-grid">
+    <section class="ability-panel ability-attacks">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">⚔</span>
+        <div><p class="section-label">On your turn</p><h2>Attacks &amp; Control</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Bow of the Verdant Hunt</strong><span>Attack · 2 per action</span></div>
+        <p><strong>+14 to hit</strong> · 150/600 ft. range · <strong>1d8 + 9 damage</strong> per shot.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Sharpshooter — Verdant Hunt</strong><span>Trade accuracy for damage</span></div>
+        <p><strong>+9 to hit</strong> · <strong>1d8 + 19 damage</strong> — take the −5/+10 trade when the target is easy to hit or already has Advantage against it.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Hunter's Mark</strong><span>Bonus Action · Concentration</span></div>
+        <p>+1d6 damage on every hit against the marked target, and you can sense its direction — keep this running on the biggest threat all fight.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Beast of the Land Attack</strong><span>+4 to hit</span></div>
+        <p><strong>1d8 + 5 / 1d10 + 5</strong> — on a hit after the beast moves, the target makes a STR save or is knocked prone.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Other options</strong></div>
+        <p><strong>Talons:</strong> +6, 1d6 + 1 · <strong>Unarmed Strike:</strong> +6, 2 bludgeoning.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-defenses">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">🛡</span>
+        <div><p class="section-label">Stay standing</p><h2>Defensives</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Flight</strong><span>Aarakocra racial trait</span></div>
+        <p>A flying speed lets Asteri stay out of melee reach entirely — use verticality and range to avoid ever being adjacent to a melee threat.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Deft Explorer — Tireless</strong><span>Action · Limited uses / Long Rest</span></div>
+        <p>Grant yourself or an ally <strong>1d8 + 4 temporary HP</strong>, and reduce one level of Exhaustion — good insurance before a big fight or after a long trek.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Numbers that matter</strong></div>
+        <p>AC 17 · high DEX-based saves and passive Perception 19 · light/medium armor and shield proficiency.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-healing">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">✚</span>
+        <div><p class="section-label">Temporary HP &amp; recovery</p><h2>Healing &amp; Support</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Tireless</strong><span>Deft Explorer</span></div>
+        <p>Asteri's main form of "healing" is temporary HP via Tireless, not direct restoration — use it proactively before damage lands, not reactively after.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Ranger spell support</strong><span>Prepared spells</span></div>
+        <p>Check prepared Ranger spells for support options (like Cure Wounds, if taken) beyond the damage/control spells listed here.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Remember:</strong> Asteri is primarily a damage and control character — lean on Leo or Vesha for sustained party healing, and use Tireless to cushion the hit before it happens.</p>
+    </section>
+
+    <section class="ability-panel ability-reactions">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">↯</span>
+        <div><p class="section-label">Outside your turn</p><h2>Reactions</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Opportunity Attack</strong><span>Reaction</span></div>
+        <p>Make one attack when a creature leaves your reach without Disengaging — with flight, this rarely comes up, since Asteri is usually already out of reach.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Reaction check:</strong> Prefer flying away over standing still to bait an Opportunity Attack — Asteri's damage comes from the bow, not melee.</p>
+    </section>
+
+    <section class="ability-panel ability-spells">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">✨</span>
+        <div><p class="section-label">Ranger casting · +9 to hit, DC 17</p><h2>Spells</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Hunter's Mark</strong><span>1st-level · Concentration</span></div>
+        <p>The backbone of Asteri's damage output — +1d6 per hit on the marked target. Recast whenever it drops or the target changes.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Ensnaring Strike</strong><span>1st-level · On a weapon hit</span></div>
+        <p>The struck target must succeed on a STR save or become Restrained by grasping vines until it breaks free — a strong lockdown option against a single dangerous melee attacker.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Known spells</strong></div>
+        <p>Animal Friendship · Detect Thoughts · Locate Creature · Speak with Plants, plus your prepared Ranger list up to available slot levels.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-cc">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">🌀</span>
+        <div><p class="section-label">Lock them down</p><h2>Crowd Control</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Ensnaring Strike</strong><span>DC 17 STR save</span></div>
+        <p>Restrains the target on a failed save, and it takes damage again each turn it tries and fails to escape — ideal on a melee brute you need to remove from the fight.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Beast of the Land — Attack</strong><span>STR save</span></div>
+        <p>A failed save after the beast moves knocks the target prone, giving melee allies Advantage and slowing the target's next actions.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Hunter's Mark tracking</strong></div>
+        <p>Sensing the marked creature's direction denies it the ability to simply vanish from the fight — control through information as much as damage.</p>
+      </article>
+    </section>
+  </div>
+
+  <section class="quick-reminders">
+    <div><strong>Stay airborne</strong><span>Use flight and range to keep melee threats from ever reaching you.</span></div>
+    <div><strong>Mark first</strong><span>Hunter's Mark before your first attack each fight, and recast the moment it lapses.</span></div>
+    <div><strong>Save Ensnaring Strike</strong><span>Hold it for the single most dangerous melee target, not the first thing you see.</span></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · Asteri's Level 13 quick reference · <a href="party.html">← Back to the Party</a></p>
+</footer>
+
+</body>
+</html>

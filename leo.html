@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leo's Battle Guide — The Storm's Debt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="ability-page">
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚡ The Storm's <span>Debt</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="party.html">The Party</a></li>
+      <li><a href="bastion.html">Heroes' Hall</a></li>
+      <li><a href="kud.html">Kud's Field Kit</a></li>
+      <li class="nav-dropdown">
+        <a href="party.html" class="nav-dropdown-toggle active">Player Guides <span class="nav-dropdown-caret" aria-hidden="true">&#9662;</span></a>
+        <ul class="nav-dropdown-menu">
+        <li><a href="kaelen.html">Kaelen</a></li>
+        <li><a href="leo.html" class="active">Leo</a></li>
+        <li><a href="asteri.html">Asteri</a></li>
+        <li><a href="jack.html">Jack</a></li>
+        <li><a href="marlo.html">Marlo</a></li>
+        <li><a href="vesha.html">Vesha</a></li>
+        </ul>
+      </li>
+      <li><a href="rules.html">Rules Ref</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="kaelen-header">
+  <div class="kaelen-header-inner">
+    <div>
+      <p class="section-label">Level 13 Leonin · Paladin 7 / Sorcerer 6</p>
+      <h1>Tyrael "Leo" Leonnister</h1>
+      <p class="kaelen-tagline">Hit like a smite, heal like a lifeline, and let nothing near your allies survive it.</p>
+    </div>
+    <div class="kaelen-header-actions">
+      <a class="ddb-link" href="https://www.dndbeyond.com/characters/109443407" target="_blank" rel="noopener">Open D&amp;D Beyond</a>
+      <button class="print-button" type="button" onclick="window.print()">Print this guide</button>
+    </div>
+  </div>
+</header>
+
+<main class="ability-sheet">
+  <section class="stat-strip" aria-label="Leo's key statistics">
+    <div><span>AC</span><strong>20</strong></div>
+    <div><span>HP</span><strong>148</strong></div>
+    <div><span>Speed</span><strong>35 ft.</strong></div>
+    <div><span>Initiative</span><strong>+2</strong></div>
+    <div><span>CHA</span><strong>20 (+5)</strong></div>
+    <div><span>Save DC</span><strong>18</strong></div>
+    <div><span>Lay on Hands</span><strong>35 HP Pool</strong></div>
+  </section>
+
+  <section class="turn-card">
+    <p class="section-label">Default combat plan</p>
+    <ol class="turn-flow">
+      <li><strong>Bonus Action:</strong> Twinned Metamagic on a buff spell, or move in with Wind Sprint.</li>
+      <li><strong>Action:</strong> Attack with the Longsword or Luminous War Pick, using Booming Blade if you expect a runner.</li>
+      <li><strong>Big hit needed:</strong> spend a Paladin spell slot on Divine Smite for extra radiant damage.</li>
+      <li><strong>Low on an ally?</strong> Lay on Hands (35 HP pool) instead of attacking.</li>
+      <li><strong>Support the line:</strong> Bless before the fight, then keep your Aura within 10–30 ft. of allies.</li>
+    </ol>
+  </section>
+
+  <div class="ability-grid">
+    <section class="ability-panel ability-attacks">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">⚔</span>
+        <div><p class="section-label">On your turn</p><h2>Attacks &amp; Control</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Longsword +1</strong><span>Attack · Versatile</span></div>
+        <p><strong>+10 to hit</strong> · <strong>1d8 + 5</strong> one-handed or <strong>1d10 + 5</strong> two-handed slashing.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Luminous War Pick</strong><span>Attack · 1 charge</span></div>
+        <p><strong>+10 to hit</strong> · <strong>1d8 + 5 / 1d10 + 5</strong> — its charge can add a radiant burst against a fiend or undead.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Divine Smite</strong><span>On a melee hit · Spend a spell slot</span></div>
+        <p>Add extra radiant damage on a successful melee hit; spend a higher-level slot for more damage, or expend one automatically against an undead or fiend target.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Booming Blade</strong><span>Cantrip · replaces one attack</span></div>
+        <p>Melee hit, then +2d8 thunder damage if the target willingly moves before your next turn — great for pinning a target near your allies.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Other weapons</strong></div>
+        <p><strong>Moon-Touched Sword (Greatsword):</strong> +9, 2d6 + 4 · <strong>Spear of Talos:</strong> +9, 1d6 + 4/1d8 + 4 · <strong>Javelin:</strong> +10, 1d6 + 4, thrown 30/120.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-defenses">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">🛡</span>
+        <div><p class="section-label">Stay standing</p><h2>Defensives</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Divine Health</strong><span>Passive</span></div>
+        <p>Immune to disease. Combined with heavy armor and a d10 hit die, Leo is built to stand in the front line and absorb hits.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Heavy Armor Master (feat)</strong><span>Passive</span></div>
+        <p>Reduce non-magical bludgeoning, piercing, and slashing damage by 3 while wearing heavy armor.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Aura of Protection / Aura of Courage</strong><span>Passive · 10–30 ft.</span></div>
+        <p>You and nearby allies add your CHA modifier (+5) to saving throws, and allies can't be Frightened while within your aura. Keep the party clustered near you.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Numbers that matter</strong></div>
+        <p>AC 20 · WIS save +11, CHA save +15 · resistance to poison and psychic damage · Darkvision 60 ft.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-healing">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">✚</span>
+        <div><p class="section-label">Temporary HP &amp; recovery</p><h2>Healing &amp; Support</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Lay on Hands</strong><span>Action · 35 HP pool</span></div>
+        <p>Touch a creature to restore HP from a shared 35-point pool (refills on a Long Rest), or spend 5 points to cure one disease or neutralize one poison instead.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Divine Sense</strong><span>Bonus Action · Detect the unnatural</span></div>
+        <p>Sense the presence of celestials, fiends, and undead within 60 ft. — use it before entering an unfamiliar room.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Bless</strong><span>1st-level · Concentration</span></div>
+        <p>Up to three creatures add 1d4 to attack rolls and saving throws — cast it before the fight starts whenever possible.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Remember:</strong> Lay on Hands is a shared pool, not per-use HP — track how much you've spent across the whole adventuring day.</p>
+    </section>
+
+    <section class="ability-panel ability-reactions">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">↯</span>
+        <div><p class="section-label">Outside your turn</p><h2>Reactions</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Opportunity Attack</strong><span>Reaction</span></div>
+        <p>Make one melee attack when a creature leaves your reach without Disengaging — a good moment to spend a smite if the hit lands.</p>
+      </article>
+
+      <p class="panel-reminder"><strong>Reaction check:</strong> Consider holding your reaction if an ally may need you to Twin a defensive spell instead.</p>
+    </section>
+
+    <section class="ability-panel ability-spells">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">✨</span>
+        <div><p class="section-label">Paladin + Sorcerer casting · +10 to hit, DC 18</p><h2>Spells</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Metamagic — Twinned Spell</strong><span>Sorcery Points</span></div>
+        <p>Spend sorcery points to target a second creature with a spell that normally only affects one target — double up Bless-like buffs or single-target control on two targets at once.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Cantrips known</strong></div>
+        <p>Booming Blade · Gust Barrier · Mage Hand · Message · Minor Illusion.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Known spells (partial)</strong></div>
+        <p>Absorb Elements · Bless, plus the rest of your Paladin/Sorcerer spell list up to your available slot levels — check current slots before each fight.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Font of Magic</strong></div>
+        <p>Convert leftover spell slots into sorcery points (or vice versa) between fights to fuel Metamagic or squeeze out one more smite.</p>
+      </article>
+    </section>
+
+    <section class="ability-panel ability-cc">
+      <div class="ability-heading">
+        <span class="ability-icon" aria-hidden="true">🌀</span>
+        <div><p class="section-label">Lock them down</p><h2>Crowd Control</h2></div>
+      </div>
+
+      <article class="ability-item ability-featured">
+        <div class="ability-name"><strong>Booming Blade</strong><span>Deterrent</span></div>
+        <p>Punishes movement with 2d8 thunder — pin a dangerous target next to you instead of letting it reach the backline.</p>
+      </article>
+
+      <article class="ability-item">
+        <div class="ability-name"><strong>Aura of Courage</strong><span>Passive · 10–30 ft.</span></div>
+        <p>Denies enemies the Frightened condition as a control tool against your allies — stand centrally so the aura covers as much of the party as possible.</p>
+      </article>
+
+      <article class="ability-item compact">
+        <div class="ability-name"><strong>Twinned control spells</strong></div>
+        <p>Use Twinned Spell on any single-target control spell you pick up (e.g., a hold or fear effect) to lock down two enemies with one slot.</p>
+      </article>
+    </section>
+  </div>
+
+  <section class="quick-reminders">
+    <div><strong>Smite timing</strong><span>Save higher-level slots for confirmed hits against a priority target or a known undead/fiend.</span></div>
+    <div><strong>Aura positioning</strong><span>Stay near the party so Aura of Protection and Aura of Courage actually cover them.</span></div>
+    <div><strong>Lay on Hands budget</strong><span>Track the 35-point pool across the whole day — don't dump it all in the first fight.</span></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>The Storm's Debt · Leo's Level 13 quick reference · <a href="party.html">← Back to the Party</a></p>
+</footer>
+
+</body>
+</html>

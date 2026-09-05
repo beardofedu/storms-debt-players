@@ -109,6 +109,86 @@ hr {
 .nav-links a:hover,
 .nav-links a.active { color: var(--lightning); }
 
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-muted);
+  font-size: .9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 0;
+  transition: color .2s;
+}
+
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle.active,
+.nav-dropdown:hover .nav-dropdown-toggle,
+.nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--lightning); }
+
+.nav-dropdown-caret {
+  font-size: .65rem;
+  transition: transform .2s;
+}
+
+.nav-dropdown:hover .nav-dropdown-caret,
+.nav-dropdown:focus-within .nav-dropdown-caret { transform: rotate(180deg); }
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: .6rem;
+  min-width: 160px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  list-style: none;
+  padding: .4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .15s, transform .15s, visibility .15s;
+  z-index: 200;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown-menu li { margin: 0; }
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: .4rem .6rem;
+  border-radius: 6px;
+  font-size: .82rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a.active {
+  background: rgba(240,230,140,.08);
+  color: var(--lightning);
+}
+
 /* ── Hero Banner ──────────────────────────────────────────────── */
 .hero {
   background: linear-gradient(160deg, #0a0e14 0%, #0d1a2e 50%, #0a0e14 100%);
@@ -587,6 +667,8 @@ blockquote {
 .ability-defenses { border-top: 3px solid var(--accent); }
 .ability-healing { border-top: 3px solid var(--success); }
 .ability-reactions { border-top: 3px solid #bc8cff; }
+.ability-spells { border-top: 3px solid #39c5cf; }
+.ability-cc { border-top: 3px solid var(--danger); }
 
 .ability-heading {
   display: flex;
