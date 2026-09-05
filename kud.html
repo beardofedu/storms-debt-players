@@ -41,8 +41,8 @@
     <div class="grid-2">
       <div class="card">
         <div class="health-title-row">
-          <div class="card-title">🛡️ Health</div>
-          <span class="health-ac">AC 17</span>
+          <div class="card-title">❤️ Health</div>
+          <span class="card-title health-ac">🛡️ AC 17</span>
         </div>
         <div class="health-display">
           <output id="guardian-hp" class="health-current" aria-live="polite">142</output>
@@ -85,6 +85,13 @@
           <button type="button" class="button button-primary" id="guardian-multiattack">Roll Multiattack</button>
         </div>
       </div>
+    </div>
+    <div class="roll-log-header mt-2">
+      <p class="section-label mb-0">Shield Guardian Rolls</p>
+      <button type="button" class="button button-quiet" id="clear-guardian-log">Reset rolls</button>
+    </div>
+    <div id="guardian-roll-log" class="roll-log mt-2" aria-live="polite">
+      <p class="text-muted">Shield Guardian rolls will appear here.</p>
     </div>
   </section>
 
@@ -149,17 +156,6 @@
     <div id="roll-log" class="roll-log mt-2" aria-live="polite">
       <p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>
     </div>
-    <div id="roll-summary" class="roll-summary mt-2" aria-live="polite" hidden>
-      <div class="roll-summary-title">Attack summary</div>
-      <div class="roll-summary-stats">
-        <div><strong id="roll-summary-crits">0</strong><span>Crits</span></div>
-        <div><strong id="roll-summary-hits">0</strong><span>Hits</span></div>
-        <div><strong id="roll-summary-misses">0</strong><span>Misses</span></div>
-        <div><strong id="roll-summary-fumbles">0</strong><span>Fumbles</span></div>
-        <div><strong id="roll-summary-damage">0</strong><span>Damage</span></div>
-      </div>
-      <p id="roll-summary-note" class="text-muted mb-0"></p>
-    </div>
   </section>
 
   <section class="section">
@@ -181,6 +177,7 @@
   const guardianMaxLabel = document.getElementById('guardian-max-label');
   const guardianHealthBar = document.getElementById('guardian-health-bar');
   const hpAdjustment = document.getElementById('hp-adjustment');
+  const guardianRollLog = document.getElementById('guardian-roll-log');
   const rollLog = document.getElementById('roll-log');
   const beastSelect = document.getElementById('beast-select');
   const beastCount = document.getElementById('beast-count');
@@ -190,14 +187,7 @@
   const rotheChargeRow = document.getElementById('rothe-charge-row');
   const rotheCharge = document.getElementById('rothe-charge');
   const estimatedAc = document.getElementById('estimated-ac');
-  const rollSummary = document.getElementById('roll-summary');
-  const rollSummaryCrits = document.getElementById('roll-summary-crits');
-  const rollSummaryHits = document.getElementById('roll-summary-hits');
-  const rollSummaryMisses = document.getElementById('roll-summary-misses');
-  const rollSummaryFumbles = document.getElementById('roll-summary-fumbles');
-  const rollSummaryDamage = document.getElementById('roll-summary-damage');
-  const rollSummaryNote = document.getElementById('roll-summary-note');
-  let lastBeastRolls = [];
+  const rollBatches = [];
 
   // Base counts per the 2014 Conjure Animals spell (CR 2/1/1-2/1-4 => 1/2/4/8).
   const beasts = {
@@ -274,16 +264,16 @@
     return bonus >= 0 ? `+${bonus}` : `${bonus}`;
   }
 
-  function addLog(message, className) {
-    const emptyMessage = rollLog.querySelector('.text-muted');
+  function addLog(log, message, className) {
+    const emptyMessage = log.querySelector('.text-muted');
     if (emptyMessage) emptyMessage.remove();
     const entry = document.createElement('div');
     entry.className = `roll-entry ${className || ''}`;
     entry.innerHTML = message;
-    rollLog.prepend(entry);
+    log.prepend(entry);
   }
 
-  function rollAttack(name, attack, index, extraFormula, extraLabel) {
+  function rollAttack(name, attack, index, extraFormula, extraLabel, log = rollLog) {
     const d20 = rollDie(20);
     const total = d20 + attack.bonus;
     const critical = d20 === 20;
@@ -306,7 +296,7 @@
 
     const attackHeadline = critical ? 'CRITICAL HIT' : fumble ? 'FUMBLE' : '';
 
-    addLog(`<div class="roll-name">${name}${index ? ` #${index}` : ''} — ${attack.label}</div>
+    addLog(log, `<div class="roll-name">${name}${index ? ` #${index}` : ''} — ${attack.label}</div>
       <div class="roll-attack-line">
         <span class="roll-attack-total" data-attack-total="${total}" data-attack-roll="${d20}">${total}</span>
         <span class="roll-attack-detail">to hit (d20 ${d20} ${formatBonus(attack.bonus)})${attackHeadline ? ` · ${attackHeadline}` : ''}</span>
@@ -334,39 +324,51 @@
       const d20 = Number(el.dataset.attackRoll);
       el.classList.toggle('roll-attack-hit', ac !== null && d20 !== 1 && (d20 === 20 || total >= ac));
     });
-    updateRollSummary();
+    updateRollSummaries();
   }
 
-  function updateRollSummary() {
-    if (!lastBeastRolls.length) {
-      rollSummary.hidden = true;
-      return;
-    }
+  function createRollSummary(rolls) {
+    const summary = document.createElement('div');
+    summary.className = 'roll-entry roll-summary';
+    summary.innerHTML = `<div class="roll-summary-title">Attack summary</div>
+      <div class="roll-summary-stats">
+        <div><strong data-summary-crits>0</strong><span>Crits</span></div>
+        <div><strong data-summary-hits>0</strong><span>Hits</span></div>
+        <div><strong data-summary-misses>0</strong><span>Misses</span></div>
+        <div><strong data-summary-fumbles>0</strong><span>Fumbles</span></div>
+        <div><strong data-summary-damage>0</strong><span>Damage</span></div>
+      </div>
+      <p class="text-muted mb-0" data-summary-note></p>`;
+    rollBatches.push({ rolls, summary });
+    return summary;
+  }
 
-    rollSummary.hidden = false;
+  function updateRollSummaries() {
     const ac = getEstimatedAc();
-    const crits = lastBeastRolls.filter((roll) => roll.critical).length;
-    const fumbles = lastBeastRolls.filter((roll) => roll.fumble).length;
-    rollSummaryCrits.textContent = crits;
-    rollSummaryFumbles.textContent = fumbles;
+    rollBatches.forEach(({ rolls, summary }) => {
+      const crits = rolls.filter((roll) => roll.critical).length;
+      const fumbles = rolls.filter((roll) => roll.fumble).length;
+      summary.querySelector('[data-summary-crits]').textContent = crits;
+      summary.querySelector('[data-summary-fumbles]').textContent = fumbles;
 
-    if (ac === null) {
-      rollSummaryHits.textContent = '-';
-      rollSummaryMisses.textContent = '-';
-      rollSummaryDamage.textContent = '-';
-      rollSummaryNote.textContent = 'Enter an estimated AC to calculate hits, misses, and applied damage.';
-      return;
-    }
+      if (ac === null) {
+        summary.querySelector('[data-summary-hits]').textContent = '-';
+        summary.querySelector('[data-summary-misses]').textContent = '-';
+        summary.querySelector('[data-summary-damage]').textContent = '-';
+        summary.querySelector('[data-summary-note]').textContent = 'Enter an estimated AC to calculate hits, misses, and applied damage.';
+        return;
+      }
 
-    const hits = lastBeastRolls.filter((roll) => !roll.critical && !roll.fumble && roll.total >= ac);
-    const misses = lastBeastRolls.length - crits - fumbles - hits.length;
-    const damage = lastBeastRolls
-      .filter((roll) => roll.critical || (!roll.fumble && roll.total >= ac))
-      .reduce((sum, roll) => sum + roll.damageTotal, 0);
-    rollSummaryHits.textContent = hits.length;
-    rollSummaryMisses.textContent = misses;
-    rollSummaryDamage.textContent = damage;
-    rollSummaryNote.textContent = `Against AC ${ac}, critical hits always hit and fumbles always miss.`;
+      const hits = rolls.filter((roll) => !roll.critical && !roll.fumble && roll.total >= ac);
+      const misses = rolls.length - crits - fumbles - hits.length;
+      const damage = rolls
+        .filter((roll) => roll.critical || (!roll.fumble && roll.total >= ac))
+        .reduce((sum, roll) => sum + roll.damageTotal, 0);
+      summary.querySelector('[data-summary-hits]').textContent = hits.length;
+      summary.querySelector('[data-summary-misses]').textContent = misses;
+      summary.querySelector('[data-summary-damage]').textContent = damage;
+      summary.querySelector('[data-summary-note]').textContent = `Against AC ${ac}, critical hits always hit and fumbles always miss.`;
+    });
   }
 
   function updateHealth(nextValue) {
@@ -426,12 +428,15 @@
     hpAdjustment.value = '';
   });
   document.getElementById('guardian-fist').addEventListener('click', () => {
-    rollAttack('Shield Guardian', { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' });
+    rollAttack('Shield Guardian', { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' }, null, null, null, guardianRollLog);
   });
   document.getElementById('guardian-multiattack').addEventListener('click', () => {
     const attack = { label: 'Fist', bonus: 7, damage: '2d6+4', damageLabel: '2d6 + 4 bludgeoning' };
-    rollAttack('Shield Guardian', attack, 1);
-    rollAttack('Shield Guardian', attack, 2);
+    rollAttack('Shield Guardian', attack, 1, null, null, guardianRollLog);
+    rollAttack('Shield Guardian', attack, 2, null, null, guardianRollLog);
+  });
+  document.getElementById('clear-guardian-log').addEventListener('click', () => {
+    guardianRollLog.innerHTML = '<p class="text-muted">Shield Guardian rolls will appear here.</p>';
   });
   beastSelect.addEventListener('change', updateBeastAttacks);
   spellLevel.addEventListener('change', updateBeastAttacks);
@@ -442,16 +447,16 @@
     const attack = beast.attacks[beastAttack.value];
     const creatureName = beastSelect.options[beastSelect.selectedIndex].text.split(' · ')[0];
     const useCharge = attack.charge && rotheCharge.checked;
-    lastBeastRolls = [];
+    const rolls = [];
     for (let i = 1; i <= Number(beastCount.value); i += 1) {
-      lastBeastRolls.push(rollAttack(creatureName, attack, i, useCharge ? '2d6' : null, useCharge ? 'charge (2d6 piercing)' : null));
+      rolls.push(rollAttack(creatureName, attack, i, useCharge ? '2d6' : null, useCharge ? 'charge (2d6 piercing)' : null));
     }
-    updateRollSummary();
+    rollLog.prepend(createRollSummary(rolls));
+    updateRollSummaries();
   });
   document.getElementById('clear-log').addEventListener('click', () => {
     rollLog.innerHTML = '<p class="text-muted">Rolls will appear here. May the evidence be conclusive.</p>';
-    lastBeastRolls = [];
-    updateRollSummary();
+    rollBatches.length = 0;
   });
 
   const savedHealth = JSON.parse(localStorage.getItem('kud-guardian-health') || 'null');
