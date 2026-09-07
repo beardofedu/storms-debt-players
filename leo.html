@@ -57,6 +57,23 @@
     <div><span>CHA</span><strong>20 (+5)</strong></div>
     <div><span>Save DC</span><strong>18</strong></div>
     <div><span>Lay on Hands</span><strong>35 HP Pool</strong></div>
+    <div class="rune-tracker" id="rune-tracker">
+      <div class="rune-tracker-heading">
+        <span>Runic Empowerment</span>
+        <output id="rune-count" aria-live="polite">0 / 5 runes</output>
+      </div>
+      <div class="rune-slots" aria-label="Rune tracker">
+        <button type="button" class="rune-slot" data-rune="1" aria-label="Rune 1" aria-pressed="false"></button>
+        <button type="button" class="rune-slot" data-rune="2" aria-label="Rune 2" aria-pressed="false"></button>
+        <button type="button" class="rune-slot" data-rune="3" aria-label="Rune 3" aria-pressed="false"></button>
+        <button type="button" class="rune-slot" data-rune="4" aria-label="Rune 4" aria-pressed="false"></button>
+        <button type="button" class="rune-slot" data-rune="5" aria-label="Rune 5" aria-pressed="false"></button>
+      </div>
+      <div class="rune-tracker-actions">
+        <button type="button" class="button button-primary" id="add-rune">Add rune</button>
+        <button type="button" class="button button-quiet" id="reset-runes">Reset</button>
+      </div>
+    </div>
   </section>
 
   <section class="turn-card">
@@ -180,6 +197,11 @@
       </article>
 
       <article class="ability-item">
+        <div class="ability-name"><strong>Runic Empowerment</strong><span>When you cast a spell with a spell slot</span></div>
+        <p>Manifest one rune, up to five total. Click a rune above when you create it; when all five are filled, the tracker glows.</p>
+      </article>
+
+      <article class="ability-item">
         <div class="ability-name"><strong>Cantrips known</strong></div>
         <p>Booming Blade · Gust Barrier · Mage Hand · Message · Minor Illusion.</p>
       </article>
@@ -228,6 +250,34 @@
 <footer class="site-footer">
   <p>The Storm's Debt · Leo's Level 13 quick reference · <a href="party.html">← Back to the Party</a></p>
 </footer>
+
+<script>
+  const runeTracker = document.getElementById('rune-tracker');
+  const runeSlots = [...document.querySelectorAll('.rune-slot')];
+  const runeCount = document.getElementById('rune-count');
+  const addRune = document.getElementById('add-rune');
+  const resetRunes = document.getElementById('reset-runes');
+
+  function updateRunes(count) {
+    const filled = Math.max(0, Math.min(count, runeSlots.length));
+    runeSlots.forEach((slot, index) => {
+      const isFilled = index < filled;
+      slot.classList.toggle('rune-slot-filled', isFilled);
+      slot.setAttribute('aria-pressed', isFilled);
+    });
+    runeCount.textContent = `${filled} / ${runeSlots.length} runes`;
+    runeTracker.classList.toggle('rune-tracker-full', filled === runeSlots.length);
+  }
+
+  runeSlots.forEach((slot, index) => {
+    slot.addEventListener('click', () => updateRunes(slot.classList.contains('rune-slot-filled') ? index : index + 1));
+  });
+  addRune.addEventListener('click', () => {
+    const filled = runeSlots.filter((slot) => slot.classList.contains('rune-slot-filled')).length;
+    updateRunes(filled + 1);
+  });
+  resetRunes.addEventListener('click', () => updateRunes(0));
+</script>
 
 </body>
 </html>

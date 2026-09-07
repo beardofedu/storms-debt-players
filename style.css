@@ -597,12 +597,83 @@ blockquote {
   margin-bottom: 1rem;
 }
 
-.stat-strip div {
+.stat-strip > div {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: .65rem .5rem;
   text-align: center;
+}
+
+.stat-strip .rune-tracker {
+  grid-column: 1 / -1;
+  text-align: left;
+}
+
+.rune-tracker {
+  transition: border-color .25s, box-shadow .25s;
+}
+
+.rune-tracker-full {
+  border-color: var(--lightning) !important;
+  box-shadow: 0 0 1rem rgba(240,230,140,.55), inset 0 0 .8rem rgba(240,230,140,.12);
+  animation: rune-tracker-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes rune-tracker-glow {
+  from { box-shadow: 0 0 1rem rgba(240,230,140,.45), inset 0 0 .8rem rgba(240,230,140,.1); }
+  to { box-shadow: 0 0 1.6rem rgba(240,230,140,.85), inset 0 0 1rem rgba(240,230,140,.2); }
+}
+
+.rune-tracker-heading,
+.rune-tracker-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.rune-tracker-heading span {
+  color: var(--gold);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.rune-tracker-heading output {
+  color: var(--text-muted);
+  font-size: .75rem;
+}
+
+.rune-slots {
+  display: flex;
+  gap: .55rem;
+  margin: .65rem 0;
+}
+
+.rune-slot {
+  width: 1.65rem;
+  height: 1.65rem;
+  border: 1px solid rgba(240,230,140,.45);
+  border-radius: 50%;
+  background: var(--card);
+  cursor: pointer;
+}
+
+.rune-slot-filled {
+  background: var(--lightning);
+  border-color: var(--lightning);
+  box-shadow: 0 0 .45rem rgba(240,230,140,.5);
+}
+
+.rune-tracker-actions {
+  justify-content: flex-start;
+}
+
+.rune-tracker-actions .button {
+  padding: .25rem .55rem;
+  font-size: .72rem;
 }
 
 .stat-strip span {
@@ -829,7 +900,10 @@ blockquote {
   .quick-reminders span { color: #333; }
   .ability-sheet { max-width: none; padding: .06in 0 0; }
   .stat-strip { gap: .035in; margin-bottom: .045in; }
-  .stat-strip div { background: none; border-color: #aaa; padding: .025in; }
+  .stat-strip > div { background: none; border-color: #aaa; padding: .025in; }
+  .rune-tracker-full { animation: none; box-shadow: none; }
+  .rune-slots { margin: .02in 0; }
+  .rune-slot { width: .14in; height: .14in; }
   .stat-strip span { color: #444; }
   .stat-strip strong { color: #111; font-size: 8px; }
   .turn-card { background: none; border-color: #777; margin-bottom: .045in; padding: .035in; }
