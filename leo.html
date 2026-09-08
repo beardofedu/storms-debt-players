@@ -70,7 +70,8 @@
         <button type="button" class="rune-slot" data-rune="5" aria-label="Rune 5" aria-pressed="false">🍑</button>
       </div>
       <div class="rune-tracker-actions">
-        <button type="button" class="button button-primary" id="add-rune">Add rune</button>
+        <button type="button" class="button button-primary" id="add-rune">+1 Rune</button>
+        <button type="button" class="button button-quiet" id="remove-rune">-1 Rune</button>
         <button type="button" class="button button-quiet" id="reset-runes">Reset</button>
       </div>
     </div>
@@ -256,6 +257,7 @@
   const runeSlots = [...document.querySelectorAll('.rune-slot')];
   const runeCount = document.getElementById('rune-count');
   const addRune = document.getElementById('add-rune');
+  const removeRune = document.getElementById('remove-rune');
   const resetRunes = document.getElementById('reset-runes');
 
   function updateRunes(count) {
@@ -275,6 +277,10 @@
   addRune.addEventListener('click', () => {
     const filled = runeSlots.filter((slot) => slot.classList.contains('rune-slot-filled')).length;
     updateRunes(filled + 1);
+  });
+  removeRune.addEventListener('click', () => {
+    const filled = runeSlots.filter((slot) => slot.classList.contains('rune-slot-filled')).length;
+    updateRunes(filled - 1);
   });
   resetRunes.addEventListener('click', () => updateRunes(0));
 </script>
