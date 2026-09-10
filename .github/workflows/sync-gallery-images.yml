@@ -16,6 +16,15 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v4
 
+      - name: Verify destination repository token
+        env:
+          DND_LEVEL20_TOKEN: ${{ secrets.DND_LEVEL20_TOKEN }}
+        run: |
+          if [ -z "$DND_LEVEL20_TOKEN" ]; then
+            echo "::error::The DND_LEVEL20_TOKEN secret is not configured. Add a token with Contents and Pull requests read/write access to beardofedu/dnd-level20."
+            exit 1
+          fi
+
       - name: Checkout destination repository
         uses: actions/checkout@v4
         with:
