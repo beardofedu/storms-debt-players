@@ -41,5 +41,5 @@ jobs:
           commit-message: Add Storm's Debt gallery images
           title: Add Storm's Debt gallery images
           body: |
-            Copies the latest images from beardofedu/storms-debt-players/gallery
+            Copies the latest images from ${{ github.repository }}/gallery
             into April-ideas/session-images.
