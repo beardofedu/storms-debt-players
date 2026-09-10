@@ -34,11 +34,15 @@ jobs:
 
       - name: Copy gallery images
         run: |
-          mkdir -p dnd-level20/April-ideas/session-images
+          find dnd-level20/April-ideas -type f \
+            \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
+               -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
+            -delete
+          mkdir -p dnd-level20/april-idea/session-images
           find gallery -maxdepth 1 -type f \
             \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
                -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
-            -exec cp -p {} dnd-level20/April-ideas/session-images/ \;
+            -exec cp -p {} dnd-level20/april-idea/session-images/ \;
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
@@ -51,4 +55,4 @@ jobs:
           title: Add Storm's Debt gallery images
           body: |
             Copies the latest images from ${{ github.repository }}/gallery
-            into April-ideas/session-images.
+            into april-idea/session-images, removing legacy images from April-ideas.
