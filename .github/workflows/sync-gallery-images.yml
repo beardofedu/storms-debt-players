@@ -36,7 +36,7 @@ jobs:
         with:
           token: ${{ secrets.DND_LEVEL20_TOKEN }}
           path: dnd-level20
-          branch: sync-storms-debt-gallery-images
+          branch: sync-gallery-images
           delete-branch: true
           commit-message: Add Storm's Debt gallery images
           title: Add Storm's Debt gallery images
