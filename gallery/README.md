@@ -1,6 +1,11 @@
 # 📸 Session Photos
 
 Drop session photos into this folder and commit them. A GitHub Action will automatically update `gallery.html` with any new images.
+It will also open a pull request to copy them to `beardofedu/dnd-level20` under
+`April-ideas/session-images`. Configure the `DND_LEVEL20_TOKEN` repository secret with
+access to that repository to enable the cross-repository pull request. A fine-grained
+PAT needs both **Contents** and **Pull requests** read/write permissions (a classic PAT
+needs the `repo` scope).
 
 **Supported formats:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.webp`, `.svg`
 

@@ -1,0 +1,54 @@
+name: Sync Gallery Images
+
+on:
+  push:
+    paths:
+      - 'gallery/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+
+      - name: Verify destination repository token
+        env:
+          DND_LEVEL20_TOKEN: ${{ secrets.DND_LEVEL20_TOKEN }}
+        run: |
+          if [ -z "$DND_LEVEL20_TOKEN" ]; then
+            echo "::error::The DND_LEVEL20_TOKEN secret is not configured. Add a token with Contents and Pull requests read/write access to beardofedu/dnd-level20."
+            exit 1
+          fi
+
+      - name: Checkout destination repository
+        uses: actions/checkout@v4
+        with:
+          repository: beardofedu/dnd-level20
+          token: ${{ secrets.DND_LEVEL20_TOKEN }}
+          path: dnd-level20
+
+      - name: Copy gallery images
+        run: |
+          mkdir -p dnd-level20/April-ideas/session-images
+          find gallery -maxdepth 1 -type f \
+            \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \
+               -o -iname '*.gif' -o -iname '*.webp' -o -iname '*.svg' \) \
+            -exec cp -p {} dnd-level20/April-ideas/session-images/ \;
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.DND_LEVEL20_TOKEN }}
+          path: dnd-level20
+          branch: sync-gallery-images
+          delete-branch: true
+          commit-message: Add Storm's Debt gallery images
+          title: Add Storm's Debt gallery images
+          body: |
+            Copies the latest images from ${{ github.repository }}/gallery
+            into April-ideas/session-images.
